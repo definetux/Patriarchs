@@ -56,24 +56,25 @@
                     <Image Grid.Row="2" Grid.Column="0" Source="Images/Cards/none.png" Width="80" Height="80"/>
                     <Image Grid.Row="2" Grid.Column="1" Source="Images/Cards/none.png" Width="80" Height="80"/>
                     <Image Grid.Row="3" Grid.Column="2" Source="Images/Cards/none.png" Width="80" Height="80"/>
-                    <cardTemplate:CardCtrl Grid.Column="0" Grid.Row="0" ImgSource="Images/Cards/Diamonds/2.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
+                    <!--<cardTemplate:CardCtrl Grid.Column="0" Grid.Row="0" ImgSource="Images/Cards/Diamonds/2.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
                     <cardTemplate:CardCtrl Grid.Column="0" Grid.Row="1" ImgSource="Images/Cards/Hearts/3.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
                     <cardTemplate:CardCtrl Grid.Column="0" Grid.Row="2" ImgSource="Images/Cards/Hearts/4.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
                     <cardTemplate:CardCtrl Grid.Column="1" Grid.Row="0" ImgSource="Images/Cards/Spades/5.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
                     <cardTemplate:CardCtrl Grid.Column="1" Grid.Row="1" ImgSource="Images/Cards/Spades/6.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
                     <cardTemplate:CardCtrl Grid.Column="1" Grid.Row="2" ImgSource="Images/Cards/Spades/7.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
                     <cardTemplate:CardCtrl Grid.Column="2" Grid.Row="0" ImgSource="Images/Cards/Spades/8.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
-                    <cardTemplate:CardCtrl Grid.Column="2" Grid.Row="1" ImgSource="Images/Cards/Spades/9.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
-                <cardTemplate:CardCtrl Grid.Column="2" Grid.Row="2" ImgSource="Images/Cards/Spades/10.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove" DropCard="CardCtrl_DropCard_1"></cardTemplate:CardCtrl>
+                    <cardTemplate:CardCtrl Grid.Column="2" Grid.Row="1" ImgSource="Images/Cards/Spades/9.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>-->
+                <!--<cardTemplate:CardCtrl Grid.Column="2" Grid.Row="2" ImgSource="Images/Cards/Spades/10.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove" DropCard="CardCtrl_DropCard_1"></cardTemplate:CardCtrl>-->
                 </Grid>
                 <Grid x:Name="untouchedDeckPanel" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                <cardTemplate:CardCtrl Grid.Row="0" ImgSource="Images/Cards/Shirts/blue.png"></cardTemplate:CardCtrl>
                 <Image Grid.Row="1" Source="Images/Cards/none.png" Width="80" Height="80"/>
-                <cardTemplate:CardCtrl Grid.Row="1" ImgSource="Images/Cards/Hearts/ace.png" Width="100" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"/>
+
+                <!--<cardTemplate:CardCtrl Grid.Row="0" ImgSource="Images/Cards/Shirts/blue.png"></cardTemplate:CardCtrl>
+                <cardTemplate:CardCtrl Grid.Row="1" ImgSource="Images/Cards/Hearts/ace.png" Width="100" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"/>-->
             </Grid>
                 <Grid x:Name="acesDeckPanel" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Grid.RowDefinitions>
@@ -82,10 +83,10 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <cardTemplate:CardCtrl Grid.Row="0" ImgSource="Images/Cards/Hearts/ace.png"></cardTemplate:CardCtrl>
+                    <!--<cardTemplate:CardCtrl Grid.Row="0" ImgSource="Images/Cards/Hearts/ace.png"></cardTemplate:CardCtrl>
                     <cardTemplate:CardCtrl Grid.Row="1" ImgSource="Images/Cards/Diamonds/ace.png"></cardTemplate:CardCtrl>
                     <cardTemplate:CardCtrl Grid.Row="2" ImgSource="Images/Cards/Clubs/ace.png"></cardTemplate:CardCtrl>
-                    <cardTemplate:CardCtrl Grid.Row="3" ImgSource="Images/Cards/Spades/ace.png"></cardTemplate:CardCtrl>
+                    <cardTemplate:CardCtrl Grid.Row="3" ImgSource="Images/Cards/Spades/ace.png"></cardTemplate:CardCtrl>-->
                 </Grid>
                 <Grid x:Name="kingsDeckPanel" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Grid.RowDefinitions>
@@ -94,10 +95,10 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <cardTemplate:CardCtrl x:Name="kingDeckFirst" Grid.Row="0" ImgSource="Images/Cards/Hearts/king.png" CardDropped="CardCtrl_CardDropped"></cardTemplate:CardCtrl>
+                    <!--cardTemplate:CardCtrl x:Name="kingDeckFirst" Grid.Row="0" ImgSource="Images/Cards/Hearts/king.png" CardDropped="CardCtrl_CardDropped"></cardTemplate:CardCtrl>
                 <cardTemplate:CardCtrl x:Name="kingDeckSecond" Grid.Row="1" ImgSource="Images/Cards/Diamonds/king.png" CardDropped="CardCtrl_CardDropped"></cardTemplate:CardCtrl>
                 <cardTemplate:CardCtrl x:Name="kingDeckThird" Grid.Row="2" ImgSource="Images/Cards/Clubs/king.png" CardDropped="CardCtrl_CardDropped"></cardTemplate:CardCtrl>
-                <cardTemplate:CardCtrl x:Name="kingDeckFourth" Grid.Row="3" ImgSource="Images/Cards/Spades/king.png" CardDropped="CardCtrl_CardDropped"></cardTemplate:CardCtrl>
+                <cardTemplate:CardCtrl x:Name="kingDeckFourth" Grid.Row="3" ImgSource="Images/Cards/Spades/king.png" CardDropped="CardCtrl_CardDropped"></cardTemplate:CardCtrl>-->
                 </Grid>
             </Grid>
         </Canvas>

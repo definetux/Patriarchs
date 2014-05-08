@@ -68,6 +68,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\BaseDeck.cs" />
+    <Compile Include="Model\Card.cs" />
+    <Compile Include="Model\GivingDeck.cs" />
+    <Compile Include="Model\IDeck.cs" />
+    <Compile Include="Model\IWorkDeck.cs" />
+    <Compile Include="Model\ToLowerDeck.cs" />
+    <Compile Include="Model\ToUpperDeck.cs" />
+    <Compile Include="Model\WorkDeck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,9 +102,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\Cards\Clubs\10.png" />
     <Resource Include="Images\Cards\Clubs\2.png" />
@@ -107,10 +113,10 @@
     <Resource Include="Images\Cards\Clubs\7.png" />
     <Resource Include="Images\Cards\Clubs\8.png" />
     <Resource Include="Images\Cards\Clubs\9.png" />
-    <Resource Include="Images\Cards\Clubs\ace.png" />
-    <Resource Include="Images\Cards\Clubs\jack.png" />
-    <Resource Include="Images\Cards\Clubs\king.png" />
-    <Resource Include="Images\Cards\Clubs\queen.png" />
+    <Resource Include="Images\Cards\Clubs\14.png" />
+    <Resource Include="Images\Cards\Clubs\11.png" />
+    <Resource Include="Images\Cards\Clubs\13.png" />
+    <Resource Include="Images\Cards\Clubs\12.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Cards\Diamonds\10.png" />
@@ -122,10 +128,10 @@
     <Resource Include="Images\Cards\Diamonds\7.png" />
     <Resource Include="Images\Cards\Diamonds\8.png" />
     <Resource Include="Images\Cards\Diamonds\9.png" />
-    <Resource Include="Images\Cards\Diamonds\ace.png" />
-    <Resource Include="Images\Cards\Diamonds\jack.png" />
-    <Resource Include="Images\Cards\Diamonds\king.png" />
-    <Resource Include="Images\Cards\Diamonds\queen.png" />
+    <Resource Include="Images\Cards\Diamonds\14.png" />
+    <Resource Include="Images\Cards\Diamonds\11.png" />
+    <Resource Include="Images\Cards\Diamonds\13.png" />
+    <Resource Include="Images\Cards\Diamonds\12.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Cards\Hearts\10.png" />
@@ -137,10 +143,10 @@
     <Resource Include="Images\Cards\Hearts\7.png" />
     <Resource Include="Images\Cards\Hearts\8.png" />
     <Resource Include="Images\Cards\Hearts\9.png" />
-    <Resource Include="Images\Cards\Hearts\ace.png" />
-    <Resource Include="Images\Cards\Hearts\jack.png" />
-    <Resource Include="Images\Cards\Hearts\king.png" />
-    <Resource Include="Images\Cards\Hearts\queen.png" />
+    <Resource Include="Images\Cards\Hearts\14.png" />
+    <Resource Include="Images\Cards\Hearts\11.png" />
+    <Resource Include="Images\Cards\Hearts\13.png" />
+    <Resource Include="Images\Cards\Hearts\12.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Cards\Spades\10.png" />
@@ -152,10 +158,10 @@
     <Resource Include="Images\Cards\Spades\7.png" />
     <Resource Include="Images\Cards\Spades\8.png" />
     <Resource Include="Images\Cards\Spades\9.png" />
-    <Resource Include="Images\Cards\Spades\ace.png" />
-    <Resource Include="Images\Cards\Spades\jack.png" />
-    <Resource Include="Images\Cards\Spades\king.png" />
-    <Resource Include="Images\Cards\Spades\queen.png" />
+    <Resource Include="Images\Cards\Spades\14.png" />
+    <Resource Include="Images\Cards\Spades\11.png" />
+    <Resource Include="Images\Cards\Spades\13.png" />
+    <Resource Include="Images\Cards\Spades\12.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Cards\Shirts\blue.png" />
