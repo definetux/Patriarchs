@@ -61,6 +61,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EventCardArgs.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -92,6 +93,84 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\Clubs\10.png" />
+    <Resource Include="Images\Cards\Clubs\2.png" />
+    <Resource Include="Images\Cards\Clubs\3.png" />
+    <Resource Include="Images\Cards\Clubs\4.png" />
+    <Resource Include="Images\Cards\Clubs\5.png" />
+    <Resource Include="Images\Cards\Clubs\6.png" />
+    <Resource Include="Images\Cards\Clubs\7.png" />
+    <Resource Include="Images\Cards\Clubs\8.png" />
+    <Resource Include="Images\Cards\Clubs\9.png" />
+    <Resource Include="Images\Cards\Clubs\ace.png" />
+    <Resource Include="Images\Cards\Clubs\jack.png" />
+    <Resource Include="Images\Cards\Clubs\king.png" />
+    <Resource Include="Images\Cards\Clubs\queen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\Diamonds\10.png" />
+    <Resource Include="Images\Cards\Diamonds\2.png" />
+    <Resource Include="Images\Cards\Diamonds\3.png" />
+    <Resource Include="Images\Cards\Diamonds\4.png" />
+    <Resource Include="Images\Cards\Diamonds\5.png" />
+    <Resource Include="Images\Cards\Diamonds\6.png" />
+    <Resource Include="Images\Cards\Diamonds\7.png" />
+    <Resource Include="Images\Cards\Diamonds\8.png" />
+    <Resource Include="Images\Cards\Diamonds\9.png" />
+    <Resource Include="Images\Cards\Diamonds\ace.png" />
+    <Resource Include="Images\Cards\Diamonds\jack.png" />
+    <Resource Include="Images\Cards\Diamonds\king.png" />
+    <Resource Include="Images\Cards\Diamonds\queen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\Hearts\10.png" />
+    <Resource Include="Images\Cards\Hearts\2.png" />
+    <Resource Include="Images\Cards\Hearts\3.png" />
+    <Resource Include="Images\Cards\Hearts\4.png" />
+    <Resource Include="Images\Cards\Hearts\5.png" />
+    <Resource Include="Images\Cards\Hearts\6.png" />
+    <Resource Include="Images\Cards\Hearts\7.png" />
+    <Resource Include="Images\Cards\Hearts\8.png" />
+    <Resource Include="Images\Cards\Hearts\9.png" />
+    <Resource Include="Images\Cards\Hearts\ace.png" />
+    <Resource Include="Images\Cards\Hearts\jack.png" />
+    <Resource Include="Images\Cards\Hearts\king.png" />
+    <Resource Include="Images\Cards\Hearts\queen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\Spades\10.png" />
+    <Resource Include="Images\Cards\Spades\2.png" />
+    <Resource Include="Images\Cards\Spades\3.png" />
+    <Resource Include="Images\Cards\Spades\4.png" />
+    <Resource Include="Images\Cards\Spades\5.png" />
+    <Resource Include="Images\Cards\Spades\6.png" />
+    <Resource Include="Images\Cards\Spades\7.png" />
+    <Resource Include="Images\Cards\Spades\8.png" />
+    <Resource Include="Images\Cards\Spades\9.png" />
+    <Resource Include="Images\Cards\Spades\ace.png" />
+    <Resource Include="Images\Cards\Spades\jack.png" />
+    <Resource Include="Images\Cards\Spades\king.png" />
+    <Resource Include="Images\Cards\Spades\queen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\Shirts\blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Desks\green.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CardLib\CardLib.csproj">
+      <Project>{01032bfa-7644-4436-bb2d-cc44bb2e3a35}</Project>
+      <Name>CardLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\none.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

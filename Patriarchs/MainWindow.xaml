@@ -1,8 +1,104 @@
 ﻿<Window x:Class="Patriarchs.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        xmlns:cardTemplate="clr-namespace:CardLib;assembly=CardLib"
+        Title="Патриархи" Height="680" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip">
+    <Window.Background>
+        <ImageBrush ImageSource="Images/Desks/green.jpg"/>
+    </Window.Background>
+        <Canvas x:Name="deskCanvas">
+            <Grid x:Name="deskGrid" Width="{Binding ActualWidth, ElementName=deskCanvas, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=deskCanvas, Mode=OneWay}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="105*"/>
+                    <ColumnDefinition Width="100*"/>
+                    <ColumnDefinition Width="212*"/>
+                    <ColumnDefinition Width="100*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Menu Grid.ColumnSpan="4">
+                    <MenuItem Header="Файл">
+                        <MenuItem x:Name="mnuNewGame" Header="Новая игра"/>
+                        <MenuItem x:Name="mnuExit" Header="Выход" Click="mnuExit_Click"/>
+                    </MenuItem>
+                    <MenuItem Header="Игра">
+                        <MenuItem x:Name="mnuRestore" Header="Восстановить"/>
+                        <MenuItem x:Name="mnuCancel" Header="Отменить"/>
+                    </MenuItem>
+                    <MenuItem Header="Параметры">
+                        <MenuItem x:Name="mnuBackgroundColor" Header="Цвет фона"/>
+                        <MenuItem x:Name="mnuShirtColor" Header="Рубашка"/>
+                    </MenuItem>
+                    <MenuItem Header="Помощь">
+                        <MenuItem x:Name="mnuRules" Header="Правила игры"/>
+                        <MenuItem x:Name="mnuAbout" Header="О программе"/>
+                    </MenuItem>
+                </Menu>
+                <Grid x:Name="workSpaceGrid" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Height="450">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image Grid.Row="0" Grid.Column="0" Source="Images/Cards/none.png" Width="80" Height="80"/>
+                    <Image Grid.Row="0" Grid.Column="1" Source="Images/Cards/none.png" Width="80" Height="80"/>
+                    <Image Grid.Row="0" Grid.Column="2" Source="Images/Cards/none.png" Width="80" Height="80"/>
+                    <Image Grid.Row="1" Grid.Column="0" Source="Images/Cards/none.png" Width="80" Height="80"/>
+                    <Image Grid.Row="1" Grid.Column="1" Source="Images/Cards/none.png" Width="80" Height="80"/>
+                    <Image Grid.Row="1" Grid.Column="2" Source="Images/Cards/none.png" Width="80" Height="80"/>
+                    <Image Grid.Row="2" Grid.Column="0" Source="Images/Cards/none.png" Width="80" Height="80"/>
+                    <Image Grid.Row="2" Grid.Column="1" Source="Images/Cards/none.png" Width="80" Height="80"/>
+                    <Image Grid.Row="3" Grid.Column="2" Source="Images/Cards/none.png" Width="80" Height="80"/>
+                    <cardTemplate:CardCtrl Grid.Column="0" Grid.Row="0" ImgSource="Images/Cards/Diamonds/2.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
+                    <cardTemplate:CardCtrl Grid.Column="0" Grid.Row="1" ImgSource="Images/Cards/Hearts/3.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
+                    <cardTemplate:CardCtrl Grid.Column="0" Grid.Row="2" ImgSource="Images/Cards/Hearts/4.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
+                    <cardTemplate:CardCtrl Grid.Column="1" Grid.Row="0" ImgSource="Images/Cards/Spades/5.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
+                    <cardTemplate:CardCtrl Grid.Column="1" Grid.Row="1" ImgSource="Images/Cards/Spades/6.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
+                    <cardTemplate:CardCtrl Grid.Column="1" Grid.Row="2" ImgSource="Images/Cards/Spades/7.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
+                    <cardTemplate:CardCtrl Grid.Column="2" Grid.Row="0" ImgSource="Images/Cards/Spades/8.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
+                    <cardTemplate:CardCtrl Grid.Column="2" Grid.Row="1" ImgSource="Images/Cards/Spades/9.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"></cardTemplate:CardCtrl>
+                <cardTemplate:CardCtrl Grid.Column="2" Grid.Row="2" ImgSource="Images/Cards/Spades/10.png" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove" DropCard="CardCtrl_DropCard_1"></cardTemplate:CardCtrl>
+                </Grid>
+                <Grid x:Name="untouchedDeckPanel" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                <cardTemplate:CardCtrl Grid.Row="0" ImgSource="Images/Cards/Shirts/blue.png"></cardTemplate:CardCtrl>
+                <Image Grid.Row="1" Source="Images/Cards/none.png" Width="80" Height="80"/>
+                <cardTemplate:CardCtrl Grid.Row="1" ImgSource="Images/Cards/Hearts/ace.png" Width="100" MouseDown="CardCtrl_MouseDown" MouseUp="CardCtrl_MouseUp" MouseMove="CardCtrl_MouseMove"/>
+            </Grid>
+                <Grid x:Name="acesDeckPanel" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <cardTemplate:CardCtrl Grid.Row="0" ImgSource="Images/Cards/Hearts/ace.png"></cardTemplate:CardCtrl>
+                    <cardTemplate:CardCtrl Grid.Row="1" ImgSource="Images/Cards/Diamonds/ace.png"></cardTemplate:CardCtrl>
+                    <cardTemplate:CardCtrl Grid.Row="2" ImgSource="Images/Cards/Clubs/ace.png"></cardTemplate:CardCtrl>
+                    <cardTemplate:CardCtrl Grid.Row="3" ImgSource="Images/Cards/Spades/ace.png"></cardTemplate:CardCtrl>
+                </Grid>
+                <Grid x:Name="kingsDeckPanel" Grid.Column="3" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <cardTemplate:CardCtrl x:Name="kingDeckFirst" Grid.Row="0" ImgSource="Images/Cards/Hearts/king.png" CardDropped="CardCtrl_CardDropped"></cardTemplate:CardCtrl>
+                <cardTemplate:CardCtrl x:Name="kingDeckSecond" Grid.Row="1" ImgSource="Images/Cards/Diamonds/king.png" CardDropped="CardCtrl_CardDropped"></cardTemplate:CardCtrl>
+                <cardTemplate:CardCtrl x:Name="kingDeckThird" Grid.Row="2" ImgSource="Images/Cards/Clubs/king.png" CardDropped="CardCtrl_CardDropped"></cardTemplate:CardCtrl>
+                <cardTemplate:CardCtrl x:Name="kingDeckFourth" Grid.Row="3" ImgSource="Images/Cards/Spades/king.png" CardDropped="CardCtrl_CardDropped"></cardTemplate:CardCtrl>
+                </Grid>
+            </Grid>
+        </Canvas>
 </Window>
