@@ -6,20 +6,36 @@ using System.Threading.Tasks;
 
 namespace Patriarchs.Model
 {
-    class WorkDeck: IDeck, IWorkDeck
+    abstract class WorkDeck: IDeck, IWorkDeck
     {
-        private string suit;
+        public static string[] Suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
 
-        private List<Card> listOfCards;
+        protected string suit;
+
+        protected List<Card> listOfCards;
+
+        public WorkDeck( string suit )
+        {
+            this.suit = suit;
+            listOfCards = new List<Card>( );
+        }
 
         public Card GetFirstCard( bool isRemove )
         {
-            return listOfCards.First( );
+            var card = listOfCards.First();
+            if( isRemove == true )
+                listOfCards.Remove( card );
+            return card;
         }
 
         public void SetCard( Card card )
         {
-            throw new NotImplementedException( );
+            listOfCards.Add( card );
+        }
+
+        public int GetDeckSize( )
+        {
+            return listOfCards.Count;
         }
     }
 }

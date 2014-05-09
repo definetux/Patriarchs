@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,11 @@ namespace Patriarchs.Model
     {
         private List<Card> listOfCards;
 
+        public GivingDeck( )
+        {
+            listOfCards = new List<Card>( );
+        }
+
         public void SetCard( Card card )
         {
             listOfCards.Add( card );
@@ -17,7 +23,18 @@ namespace Patriarchs.Model
 
         public Card GetFirstCard( bool isRemove )
         {
-            return listOfCards.First();
+            var card = listOfCards.Last( );
+            if( isRemove == true )
+            {
+                listOfCards.Remove( card );
+            }
+            return card;
+        }
+
+
+        public int GetDeckSize( )
+        {
+            return listOfCards.Count;
         }
     }
 }

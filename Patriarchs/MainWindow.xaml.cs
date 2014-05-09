@@ -25,6 +25,13 @@ namespace Patriarchs
         Point m_currentPoint;
         bool isDrag = false;
         BaseDeck baseDeck;
+        GivingDeck givingDeck;
+        List<ToUpperDeck> upperDecks;
+        List<ToLowerDeck> lowerDecks;
+        List<Card>  freeCards;
+        Card currentCard;
+        IDeck currentDeck;
+
 
         private TranslateTransform currentTransform;
 
@@ -32,6 +39,9 @@ namespace Patriarchs
         {
             InitializeComponent( );
             BuildBaseDeck( );
+            BuildFreeCards( );
+            BuildUpperDecks( );
+            BuildLowerDecks( );
         }
 
         private void mnuExit_Click( object sender, RoutedEventArgs e )
@@ -64,8 +74,6 @@ namespace Patriarchs
                 currentTransform.X += m_currentPoint.X - m_anchorPoint.X;
                 currentTransform.Y += ( m_currentPoint.Y - m_anchorPoint.Y );
 
-
-
                 ( ( CardLib.CardCtrl )sender ).RenderTransform = currentTransform;
                 m_anchorPoint = m_currentPoint;
             }
@@ -84,10 +92,9 @@ namespace Patriarchs
 
                 CardLib.CardCtrl card = sender as CardLib.CardCtrl;
                 var parent = card.Parent as Grid;
-                Canvas.SetZIndex( parent, 1 );
-                Canvas.SetZIndex( card, 2 );
+                Canvas.SetZIndex( parent, 0 );
+                Canvas.SetZIndex( card, 0 );
 
-                
                 card.OnDropCard( card, new CardLib.EventCardArgs( 2, "Hearts" ) );
             }
         }
@@ -101,7 +108,6 @@ namespace Patriarchs
         {
             var card = sender as CardLib.CardCtrl;
             var cardParent = card.Parent as Grid;
-            MessageBox.Show( card.ImgSource.ToString() );
             switch( e.Suit )
             {
                 case "Hearts":
@@ -146,27 +152,127 @@ namespace Patriarchs
 
         private void BuildBaseDeck( )
         {
-            baseDeck = new BaseDeck( 10, Properties.Resources.PathToShirts );
+            baseDeck = new BaseDeck( 12, Properties.Resources.PathToShirts );
+            givingDeck = new GivingDeck( );
 
-            var givenCard = baseDeck.GetFirstCard( true );
-            givenCard.SetPathToImage( Properties.Resources.PathToCards
+            SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
+        }
+
+        private void BuildUpperDecks( )
+        {
+            upperDecks = new List<ToUpperDeck>( );
+            for( int i = 0; i < 4; i++ )
+            {
+                ToUpperDeck deck = new ToUpperDeck( WorkDeck.Suits[i] );
+                upperDecks.Add( deck );
+                var card = deck.GetFirstCard( false );
+                acesDeckPanel.Children.Add( card.CardControl );
+                Grid.SetRow( card.CardControl, i );
+            }
+        }
+
+        private void BuildLowerDecks( )
+        {
+            lowerDecks = new List<ToLowerDeck>( );
+            for( int i = 0; i < 4; i++ )
+            {
+                ToLowerDeck deck = new ToLowerDeck( WorkDeck.Suits[ i ] );
+                lowerDecks.Add( deck );
+                var card = deck.GetFirstCard( false );
+                kingsDeckPanel.Children.Add( card.CardControl );
+                Grid.SetRow( card.CardControl, i );
+            }
+        }
+
+        private void BuildFreeCards( )
+        {
+            freeCards = new List<Card>( );
+            int rows = workSpaceGrid.RowDefinitions.Count;
+            for( int i = 0; i < rows * rows; i++ )
+            {
+                var card = baseDeck.GetFirstCard( true );
+                card.SetPathToImage( Properties.Resources.PathToCards
                                         + '/'
-                                        + givenCard.Suit
+                                        + card.Suit
                                         + '/'
-                                        + givenCard.Number.ToString( )
+                                        + card.Number.ToString( )
                                         + ".png" );
 
-            givenCard.CardControl.MouseDown += CardCtrl_MouseDown;
-            givenCard.CardControl.MouseMove += CardCtrl_MouseMove;
-            givenCard.CardControl.MouseUp += CardCtrl_MouseUp;
-            givenCard.CardControl.DropCard += CardCtrl_DropCard_1;
+                card.CardControl.MouseUp -= untouchedCard_MouseUp;
 
-            untouchedDeckPanel.Children.Add( givenCard.CardControl );
-            Grid.SetRow( givenCard.CardControl, 1 );
+                card.CardControl.MouseDown += CardCtrl_MouseDown;
+                card.CardControl.MouseMove += CardCtrl_MouseMove;
+                card.CardControl.MouseUp += CardCtrl_MouseUp;
+                card.CardControl.DropCard += CardCtrl_DropCard_1;
 
-            var untouchedCard = baseDeck.GetFirstCard( false ).CardControl;
-            untouchedDeckPanel.Children.Add( untouchedCard );
-            Grid.SetRow( untouchedCard, 0 );
+                var parent = card.CardControl.Parent as Grid;
+                if( parent != null )
+                    parent.Children.Remove( card.CardControl );
+
+                workSpaceGrid.Children.Add( card.CardControl );
+
+
+                Grid.SetColumn( card.CardControl, i % rows );
+                Grid.SetRow( card.CardControl, i / rows );
+            }
+            SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
+        }
+
+        private void SetFirstBaseCard( Card untouchedCard )
+        {
+            untouchedCard.CardControl.MouseUp += untouchedCard_MouseUp;
+
+            var parent = untouchedCard.CardControl.Parent as Grid;
+            if( parent != null )
+                parent.Children.Remove( untouchedCard.CardControl );
+
+            untouchedDeckPanel.Children.Add( untouchedCard.CardControl );
+            Grid.SetRow( untouchedCard.CardControl, 0 );
+        }
+
+        void untouchedCard_MouseUp( object sender, MouseButtonEventArgs e )
+        {
+            var card = baseDeck.GetFirstCard( true );
+            card.SetPathToImage( Properties.Resources.PathToCards
+                                        + '/'
+                                        + card.Suit
+                                        + '/'
+                                        + card.Number.ToString( )
+                                        + ".png" );
+
+            card.CardControl.MouseUp -= untouchedCard_MouseUp;
+
+            card.CardControl.MouseDown += CardCtrl_MouseDown;
+            card.CardControl.MouseMove += CardCtrl_MouseMove;
+            card.CardControl.MouseUp += CardCtrl_MouseUp;
+            card.CardControl.DropCard += CardCtrl_DropCard_1;
+
+            Grid.SetRow( card.CardControl, 1 );
+
+            givingDeck.SetCard( card );
+
+            var newUntouchedCard = baseDeck.GetFirstCard( false );
+            if( newUntouchedCard != null )
+            {
+                SetFirstBaseCard( newUntouchedCard );
+            }
+        }
+
+        private void Back_MouseUp( object sender, MouseButtonEventArgs e )
+        {
+            int count = givingDeck.GetDeckSize( );
+            for( int i = 0; i < count; i++ )
+            {
+                var card = givingDeck.GetFirstCard( true );
+                baseDeck.SetCard( card );
+                Grid.SetRow( card.CardControl, 0 );
+                card.CardControl.MouseDown -= CardCtrl_MouseDown;
+                card.CardControl.MouseMove -= CardCtrl_MouseMove;
+                card.CardControl.MouseUp -= CardCtrl_MouseUp;
+                card.CardControl.DropCard -= CardCtrl_DropCard_1;
+            }
+
+            SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
         }
     }
 }

@@ -8,5 +8,17 @@ namespace Patriarchs.Model
 {
     class ToUpperDeck: WorkDeck
     {
+        public ToUpperDeck( string suit )
+            : base( suit )
+        {
+            int number = 14;
+            string pathToImage = Properties.Resources.PathToCards
+                                    + '/'
+                                    + suit
+                                    +'/'
+                                    +number.ToString()
+                                    + ".png";
+            listOfCards.Add( new Card( number, suit, pathToImage ) );
+        }
     }
 }

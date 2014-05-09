@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 
 namespace Patriarchs.Model
 {
-    class BaseDeck: IDeck
+    class BaseDeck: IDeck, IWorkDeck
     {
         private List<Card> listOfCard;
+        private string shirts;
 
         public BaseDeck( int count, string shirts )
         {
             listOfCard = new List<Card>( );
+            this.shirts = shirts;
             Random rand = new Random( );
+
             for( int i = 0; i < count; i++ )
             {
                 int number = rand.Next( 13 ) + 2;
@@ -28,15 +31,27 @@ namespace Patriarchs.Model
 
         public Card GetFirstCard( bool isRemove )
         {
-            if( listOfCard != null )
+            if( listOfCard.Count != 0 )
             {
-                Card firstCard = listOfCard.First( );
+                Card firstCard = listOfCard.Last( );
                 if( isRemove == true )
-                    listOfCard.RemoveAt( 0 );
+                    listOfCard.Remove( firstCard );
                 return firstCard;
             }
             else
                 return null;
+        }
+
+        public void SetCard( Card card )
+        {
+            card.SetPathToImage( "/Images/Cards/Shirts/" + shirts );
+            listOfCard.Add( card );
+        }
+
+
+        public int GetDeckSize( )
+        {
+            return listOfCard.Count;
         }
     }
 }
