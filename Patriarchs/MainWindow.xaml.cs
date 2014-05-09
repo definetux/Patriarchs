@@ -61,6 +61,8 @@ namespace Patriarchs
             var parent = card.Parent as Grid;
             Canvas.SetZIndex( parent, 1000 );
             Canvas.SetZIndex( card, 1001 );
+
+            SetCurrentCard( card );
         }
 
         private void CardCtrl_MouseMove( object sender, MouseEventArgs e )
@@ -95,7 +97,7 @@ namespace Patriarchs
                 Canvas.SetZIndex( parent, 0 );
                 Canvas.SetZIndex( card, 0 );
 
-                card.OnDropCard( card, new CardLib.EventCardArgs( 2, "Hearts" ) );
+                card.OnDropCard( card, new CardLib.EventCardArgs( currentCard.Number, currentCard.Suit ) );
             }
         }
 
@@ -104,7 +106,44 @@ namespace Patriarchs
             MessageBox.Show( e.Number + e.Suit );
         }
 
-        private void CardCtrl_DropCard_1( object sender, CardLib.EventCardArgs e )
+        private void SetCurrentCard( CardLib.CardCtrl card )
+        {
+            var parent = card.Parent as Grid;
+            switch( parent.Name )
+            {
+                case "workSpaceGrid":
+                    {
+                        int cardRow = Grid.GetRow( card );
+                        int cardCol = Grid.GetColumn( card );
+                        int size = parent.RowDefinitions.Count;
+                        currentCard = freeCards[ cardRow * size + cardCol ];
+                        currentDeck = null;
+                    }
+                    break;
+                case "untouchedDeckPanel":
+                    {
+                        currentCard = givingDeck.GetFirstCard( false );
+                        currentDeck = givingDeck;
+                    }
+                    break;
+                case "acesDeckPanel":
+                    {
+                        int cardRow = Grid.GetRow( card );
+                        currentCard = upperDecks[ cardRow ].GetFirstCard( false );
+                        currentDeck = upperDecks[ cardRow ];
+                    }
+                    break;
+                case "kingsDeckPanel":
+                    {
+                        int cardRow = Grid.GetRow( card );
+                        currentCard = lowerDecks[ cardRow ].GetFirstCard( false );
+                        currentDeck = lowerDecks[ cardRow ];
+                    }
+                    break;
+            }
+        }
+
+        private void CardCtrl_DropCard( object sender, CardLib.EventCardArgs e )
         {
             var card = sender as CardLib.CardCtrl;
             var cardParent = card.Parent as Grid;
@@ -112,11 +151,8 @@ namespace Patriarchs
             {
                 case "Hearts":
                     {
-                        //kingDeckFirst.OnCardDroped( card, e );
-                        //cardParent.Children.Remove( card );
-                        //kingsDeckPanel.Children.Add( card );
-                        //Grid.SetRow( card, 0 );
-                        //Grid.SetColumn( card, 0 );
+                        //System.Windows.Media.GeneralTransform __transform = acesDeckPanel.TransformToVisual( );
+                       // Point __pointOffset = __transform.Transform( new Point( 0, 0 ) );
                     }
                     break;
                 case "Clubs":
@@ -191,6 +227,7 @@ namespace Patriarchs
             for( int i = 0; i < rows * rows; i++ )
             {
                 var card = baseDeck.GetFirstCard( true );
+                freeCards.Add( card );
                 card.SetPathToImage( Properties.Resources.PathToCards
                                         + '/'
                                         + card.Suit
@@ -203,14 +240,13 @@ namespace Patriarchs
                 card.CardControl.MouseDown += CardCtrl_MouseDown;
                 card.CardControl.MouseMove += CardCtrl_MouseMove;
                 card.CardControl.MouseUp += CardCtrl_MouseUp;
-                card.CardControl.DropCard += CardCtrl_DropCard_1;
+                card.CardControl.DropCard += CardCtrl_DropCard;
 
                 var parent = card.CardControl.Parent as Grid;
                 if( parent != null )
                     parent.Children.Remove( card.CardControl );
 
                 workSpaceGrid.Children.Add( card.CardControl );
-
 
                 Grid.SetColumn( card.CardControl, i % rows );
                 Grid.SetRow( card.CardControl, i / rows );
@@ -245,7 +281,7 @@ namespace Patriarchs
             card.CardControl.MouseDown += CardCtrl_MouseDown;
             card.CardControl.MouseMove += CardCtrl_MouseMove;
             card.CardControl.MouseUp += CardCtrl_MouseUp;
-            card.CardControl.DropCard += CardCtrl_DropCard_1;
+            card.CardControl.DropCard += CardCtrl_DropCard;
 
             Grid.SetRow( card.CardControl, 1 );
 
@@ -269,7 +305,7 @@ namespace Patriarchs
                 card.CardControl.MouseDown -= CardCtrl_MouseDown;
                 card.CardControl.MouseMove -= CardCtrl_MouseMove;
                 card.CardControl.MouseUp -= CardCtrl_MouseUp;
-                card.CardControl.DropCard -= CardCtrl_DropCard_1;
+                card.CardControl.DropCard -= CardCtrl_DropCard;
             }
 
             SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
