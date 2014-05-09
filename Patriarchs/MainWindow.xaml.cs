@@ -21,6 +21,9 @@ namespace Patriarchs
     /// </summary>
     public partial class MainWindow : Window
     {
+        const double CARD_WIDTH = 90;
+        const double CARD_HEIGHT = 130;
+
         Point m_anchorPoint;
         Point m_currentPoint;
         bool isDrag = false;
@@ -143,6 +146,29 @@ namespace Patriarchs
             }
         }
 
+        private bool CheckLowerDeck( int row )
+        {
+            var c = lowerDecks[ row ].GetFirstCard( false ).CardControl;
+            return CheckPosition( c );
+
+        }
+
+        private bool CheckUpperDeck( int row )
+        {
+            var c = upperDecks[ row ].GetFirstCard( false ).CardControl;
+            return CheckPosition( c );
+        }
+
+        private bool CheckPosition( IInputElement element )
+        {
+            Point p = Mouse.GetPosition( element );
+
+            if( p.X > 0 && p.X < CARD_WIDTH && p.Y > 0 && p.Y < CARD_HEIGHT )
+                return true;
+            else
+                return false;
+        }
+
         private void CardCtrl_DropCard( object sender, CardLib.EventCardArgs e )
         {
             var card = sender as CardLib.CardCtrl;
@@ -151,8 +177,25 @@ namespace Patriarchs
             {
                 case "Hearts":
                     {
-                        //System.Windows.Media.GeneralTransform __transform = acesDeckPanel.TransformToVisual( );
-                       // Point __pointOffset = __transform.Transform( new Point( 0, 0 ) );
+                        if( CheckUpperDeck( 0 ) )
+                        {
+                            if( currentDeck != null )
+                                currentDeck.RemoveCard( currentCard );
+                            upperDecks[ 0 ].SetCard( currentCard );
+                            cardParent.Children.Remove( card );
+                            acesDeckPanel.Children.Add( card );
+                            Grid.SetRow( card, 0 );
+                            Grid.SetColumn( card, 0 );
+                        }
+                        else
+                            if( CheckLowerDeck( 0 ) )
+                            {
+                                upperDecks[ 0 ].SetCard( currentCard );
+                                cardParent.Children.Remove( card );
+                                kingsDeckPanel.Children.Add( card );
+                                Grid.SetRow( card, 0 );
+                                Grid.SetColumn( card, 0 );
+                            }
                     }
                     break;
                 case "Clubs":
@@ -297,6 +340,10 @@ namespace Patriarchs
         private void Back_MouseUp( object sender, MouseButtonEventArgs e )
         {
             int count = givingDeck.GetDeckSize( );
+
+            if( count == 0 )
+                return;
+
             for( int i = 0; i < count; i++ )
             {
                 var card = givingDeck.GetFirstCard( true );

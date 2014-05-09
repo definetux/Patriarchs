@@ -53,5 +53,12 @@ namespace Patriarchs.Model
         {
             return listOfCard.Count;
         }
+
+
+        public void RemoveCard( Card card )
+        {
+            if( listOfCard.Count != 0 )
+                listOfCard.Remove( card );
+        }
     }
 }

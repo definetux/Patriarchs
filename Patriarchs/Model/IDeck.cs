@@ -11,5 +11,7 @@ namespace Patriarchs.Model
         Card GetFirstCard( bool isRemove );
 
         int GetDeckSize( );
+
+        void RemoveCard( Card card );
     }
 }
