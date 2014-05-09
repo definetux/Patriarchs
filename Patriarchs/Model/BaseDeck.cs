@@ -20,7 +20,7 @@ namespace Patriarchs.Model
             for( int i = 0; i < count; i++ )
             {
                 int number = rand.Next( 13 ) + 2;
-                string suit = "Hearts";
+                string suit = WorkDeck.Suits[ rand.Next( WorkDeck.Suits.Length ) ];
                 string pathToImage = "/Images/Cards/Shirts/" + shirts;
 
                 listOfCard.Add( new Card( number, suit, pathToImage ) );

@@ -23,6 +23,7 @@ namespace Patriarchs
     {
         const double CARD_WIDTH = 90;
         const double CARD_HEIGHT = 130;
+        const int CARDS_COUNT = 20;
 
         Point m_anchorPoint;
         Point m_currentPoint;
@@ -169,6 +170,44 @@ namespace Patriarchs
                 return false;
         }
 
+        private void SetCurrentCard( WorkDeck deck )
+        {
+            if( currentDeck != null )
+                currentDeck.RemoveCard( currentCard );
+            deck.SetCard( currentCard );
+        }
+
+        private void AddToUpper( int row, Grid parent, CardLib.CardCtrl card )
+        {
+            SetCurrentCard( upperDecks[ row ] );
+            parent.Children.Remove( card );
+            acesDeckPanel.Children.Add( card );
+            Grid.SetRow( card, row );
+            Grid.SetColumn( card, row );
+        }
+
+        private void AddToLower( int row, Grid parent, CardLib.CardCtrl card )
+        {
+            SetCurrentCard( lowerDecks[ row ] );
+            parent.Children.Remove( card );
+            kingsDeckPanel.Children.Add( card );
+            Grid.SetRow( card, row );
+            Grid.SetColumn( card, row );
+        }
+
+        private void AddToResultDeck( int row, Grid parent, CardLib.CardCtrl card )
+        {
+            if( CheckUpperDeck( row ) )
+            {
+                AddToUpper( row, parent, card );
+            }
+            else
+                if( CheckLowerDeck( row ) )
+                {
+                    AddToLower( row, parent, card );
+                }
+        }
+
         private void CardCtrl_DropCard( object sender, CardLib.EventCardArgs e )
         {
             var card = sender as CardLib.CardCtrl;
@@ -177,52 +216,22 @@ namespace Patriarchs
             {
                 case "Hearts":
                     {
-                        if( CheckUpperDeck( 0 ) )
-                        {
-                            if( currentDeck != null )
-                                currentDeck.RemoveCard( currentCard );
-                            upperDecks[ 0 ].SetCard( currentCard );
-                            cardParent.Children.Remove( card );
-                            acesDeckPanel.Children.Add( card );
-                            Grid.SetRow( card, 0 );
-                            Grid.SetColumn( card, 0 );
-                        }
-                        else
-                            if( CheckLowerDeck( 0 ) )
-                            {
-                                upperDecks[ 0 ].SetCard( currentCard );
-                                cardParent.Children.Remove( card );
-                                kingsDeckPanel.Children.Add( card );
-                                Grid.SetRow( card, 0 );
-                                Grid.SetColumn( card, 0 );
-                            }
-                    }
-                    break;
-                case "Clubs":
-                    {
-                        //kingDeckThird.OnCardDroped( card, e );
-                        //cardParent.Children.Remove( card );
-                        //kingsDeckPanel.Children.Add( card );
-                        //Grid.SetRow( card, 2 );
-                        //Grid.SetColumn( card, 0 );
+                        AddToResultDeck( ( int )E_SUIT.HEARTS, cardParent, card );
                     }
                     break;
                 case "Diamonds":
                     {
-                        //kingDeckSecond.OnCardDroped( card, e );
-                        //cardParent.Children.Remove( card );
-                        //kingsDeckPanel.Children.Add( card );
-                        //Grid.SetRow( card, 1 );
-                        //Grid.SetColumn( card, 0 );
+                        AddToResultDeck( ( int )E_SUIT.DIAMONDS, cardParent, card );
+                    }
+                    break;
+                case "Clubs":
+                    {
+                        AddToResultDeck( ( int )E_SUIT.CLUBS, cardParent, card );
                     }
                     break;
                 case "Spades":
                     {
-                        //kingDeckFourth.OnCardDroped( card, e );
-                        //cardParent.Children.Remove( card );
-                        //kingsDeckPanel.Children.Add( card );
-                        //Grid.SetRow( card, 3 );
-                        //Grid.SetColumn( card, 0 );
+                        AddToResultDeck( ( int )E_SUIT.SPADES, cardParent, card );
                     }
                     break;
             };
@@ -231,7 +240,7 @@ namespace Patriarchs
 
         private void BuildBaseDeck( )
         {
-            baseDeck = new BaseDeck( 12, Properties.Resources.PathToShirts );
+            baseDeck = new BaseDeck( CARDS_COUNT, Properties.Resources.PathToShirts );
             givingDeck = new GivingDeck( );
 
             SetFirstBaseCard( baseDeck.GetFirstCard( false ) );

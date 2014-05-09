@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Patriarchs.Model
 {
+    enum E_SUIT
+    {
+        HEARTS,
+        DIAMONDS,
+        CLUBS,
+        SPADES
+    }
     abstract class WorkDeck: IDeck, IWorkDeck
     {
         public static string[] Suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
