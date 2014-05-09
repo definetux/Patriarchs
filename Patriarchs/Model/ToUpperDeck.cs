@@ -11,7 +11,7 @@ namespace Patriarchs.Model
         public ToUpperDeck( string suit )
             : base( suit )
         {
-            int number = 14;
+            int number = 1;
             string pathToImage = Properties.Resources.PathToCards
                                     + '/'
                                     + suit

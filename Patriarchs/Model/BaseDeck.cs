@@ -15,13 +15,37 @@ namespace Patriarchs.Model
         {
             listOfCard = new List<Card>( );
             this.shirts = shirts;
+            string pathToImage = Properties.Resources.FullPathToShirts + shirts;
+
             Random rand = new Random( );
+
+            List<List<int>> sequences = new List<List<int>>( );
+
+            for( int i = 0; i < 8; i++ )
+            {
+                if( i % 2 == 0 )
+                {
+                    sequences.Add( GenerateDeck( 1, 13 ) );
+                }
+                else
+                {
+                    sequences.Add( GenerateDeck( 2, 14 ) );
+                }
+            }
 
             for( int i = 0; i < count; i++ )
             {
-                int number = rand.Next( 13 ) + 2;
-                string suit = WorkDeck.Suits[ rand.Next( WorkDeck.Suits.Length ) ];
-                string pathToImage = "/Images/Cards/Shirts/" + shirts;
+                int deckNumber = rand.Next( sequences.Count );
+                while( sequences.Count != 0 &&  sequences[ deckNumber ].Count == 0 )
+                {
+                    sequences.RemoveAt( deckNumber );
+                    deckNumber++;
+                    deckNumber %= sequences.Count;
+                }
+
+                int number = sequences[ deckNumber ].First( );
+                sequences[ deckNumber ].Remove( number );
+                string suit = WorkDeck.Suits[ deckNumber % 4 ];
 
                 listOfCard.Add( new Card( number, suit, pathToImage ) );
             }
@@ -44,7 +68,7 @@ namespace Patriarchs.Model
 
         public void SetCard( Card card )
         {
-            card.SetPathToImage( "/Images/Cards/Shirts/" + shirts );
+            card.SetPathToImage( Properties.Resources.FullPathToShirts + shirts );
             listOfCard.Add( card );
         }
 
@@ -59,6 +83,26 @@ namespace Patriarchs.Model
         {
             if( listOfCard.Count != 0 )
                 listOfCard.Remove( card );
+        }
+
+        private List<int> GenerateDeck( int start, int finish )
+        {
+            List<int> startSeq = new List<int>();
+            List<int> resultSeq = new List<int>();
+
+            for( int i = 0; i < finish - start; i++ )
+                startSeq.Add( i + 1 );
+
+            Random rnd = new Random( );
+
+            while( startSeq.Count != 0 )
+            {
+                int item = rnd.Next( startSeq.Count );
+                resultSeq.Add( startSeq[ item ] );
+                startSeq.RemoveAt( item );
+            }
+
+            return resultSeq;
         }
     }
 }

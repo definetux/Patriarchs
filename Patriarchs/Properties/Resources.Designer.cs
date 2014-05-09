@@ -61,6 +61,15 @@ namespace Patriarchs.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /Images/Cards/Shirts/.
+        /// </summary>
+        internal static string FullPathToShirts {
+            get {
+                return ResourceManager.GetString("FullPathToShirts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to /Images/Cards.
         /// </summary>
         internal static string PathToCards {

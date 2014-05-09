@@ -115,7 +115,7 @@
     <Resource Include="Images\Cards\Clubs\7.png" />
     <Resource Include="Images\Cards\Clubs\8.png" />
     <Resource Include="Images\Cards\Clubs\9.png" />
-    <Resource Include="Images\Cards\Clubs\14.png" />
+    <Resource Include="Images\Cards\Clubs\1.png" />
     <Resource Include="Images\Cards\Clubs\11.png" />
     <Resource Include="Images\Cards\Clubs\13.png" />
     <Resource Include="Images\Cards\Clubs\12.png" />
@@ -130,7 +130,7 @@
     <Resource Include="Images\Cards\Diamonds\7.png" />
     <Resource Include="Images\Cards\Diamonds\8.png" />
     <Resource Include="Images\Cards\Diamonds\9.png" />
-    <Resource Include="Images\Cards\Diamonds\14.png" />
+    <Resource Include="Images\Cards\Diamonds\1.png" />
     <Resource Include="Images\Cards\Diamonds\11.png" />
     <Resource Include="Images\Cards\Diamonds\13.png" />
     <Resource Include="Images\Cards\Diamonds\12.png" />
@@ -145,7 +145,7 @@
     <Resource Include="Images\Cards\Hearts\7.png" />
     <Resource Include="Images\Cards\Hearts\8.png" />
     <Resource Include="Images\Cards\Hearts\9.png" />
-    <Resource Include="Images\Cards\Hearts\14.png" />
+    <Resource Include="Images\Cards\Hearts\1.png" />
     <Resource Include="Images\Cards\Hearts\11.png" />
     <Resource Include="Images\Cards\Hearts\13.png" />
     <Resource Include="Images\Cards\Hearts\12.png" />
@@ -160,7 +160,7 @@
     <Resource Include="Images\Cards\Spades\7.png" />
     <Resource Include="Images\Cards\Spades\8.png" />
     <Resource Include="Images\Cards\Spades\9.png" />
-    <Resource Include="Images\Cards\Spades\14.png" />
+    <Resource Include="Images\Cards\Spades\1.png" />
     <Resource Include="Images\Cards\Spades\11.png" />
     <Resource Include="Images\Cards\Spades\13.png" />
     <Resource Include="Images\Cards\Spades\12.png" />

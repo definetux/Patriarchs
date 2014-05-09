@@ -23,7 +23,7 @@ namespace Patriarchs
     {
         const double CARD_WIDTH = 90;
         const double CARD_HEIGHT = 130;
-        const int CARDS_COUNT = 20;
+        const int CARDS_COUNT = 96; // 408
 
         Point m_anchorPoint;
         Point m_currentPoint;
