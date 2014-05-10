@@ -82,7 +82,7 @@ namespace Patriarchs.Model
             listOfCard.First( ).IsActive = true;
         }
 
-        public Card GetFirstCard( bool isRemove )
+        public Card GetFirstCard( bool isRemove, int number = 0 )
         {
             if( listOfCard.Count != 0 )
             {
@@ -95,7 +95,7 @@ namespace Patriarchs.Model
                 return null;
         }
 
-        public void SetCard( Card card )
+        public void SetCard( Card card, int number = 0 )
         {
             card.SetPathToImage( Properties.Resources.FullPathToShirts + shirts );
             listOfCard.Add( card );

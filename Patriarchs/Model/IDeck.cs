@@ -8,7 +8,7 @@ namespace Patriarchs.Model
 {
     interface IDeck
     {
-        Card GetFirstCard( bool isRemove );
+        Card GetFirstCard( bool isRemove, int number );
 
         int GetDeckSize( );
 

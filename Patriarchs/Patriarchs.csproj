@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="Model\BaseDeck.cs" />
     <Compile Include="Model\Card.cs" />
+    <Compile Include="Model\FreeDeck.cs" />
     <Compile Include="Model\GivingDeck.cs" />
     <Compile Include="Model\IDeck.cs" />
     <Compile Include="Model\IWorkDeck.cs" />

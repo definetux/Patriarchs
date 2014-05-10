@@ -16,12 +16,12 @@ namespace Patriarchs.Model
             listOfCards = new List<Card>( );
         }
 
-        public void SetCard( Card card )
+        public void SetCard( Card card, int number = 0 )
         {
             listOfCards.Add( card );
         }
 
-        public Card GetFirstCard( bool isRemove )
+        public Card GetFirstCard( bool isRemove, int number = 0 )
         {
             var card = listOfCards.Last( );
             if( isRemove == true )

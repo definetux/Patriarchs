@@ -25,16 +25,16 @@ namespace Patriarchs
         const double CARD_HEIGHT = 130;
         const int CARDS_COUNT = 96; // 408
 
-        Point m_anchorPoint;
-        Point m_currentPoint;
-        bool isDrag = false;
-        BaseDeck baseDeck;
-        GivingDeck givingDeck;
-        List<ToUpperDeck> upperDecks;
-        List<ToLowerDeck> lowerDecks;
-        List<Card>  freeCards;
-        Card currentCard;
-        IDeck currentDeck;
+        private Point m_anchorPoint;
+        private Point m_currentPoint;
+        private bool isDrag = false;
+        private BaseDeck baseDeck;
+        private GivingDeck givingDeck;
+        private List<ToUpperDeck> upperDecks;
+        private List<ToLowerDeck> lowerDecks;
+        private Card currentCard;
+        private IDeck currentDeck;
+        private FreeDeck freeCards;
 
 
         private TranslateTransform currentTransform;
@@ -120,8 +120,8 @@ namespace Patriarchs
                         int cardRow = Grid.GetRow( card );
                         int cardCol = Grid.GetColumn( card );
                         int size = parent.RowDefinitions.Count;
-                        currentCard = freeCards[ cardRow * size + cardCol ];
-                        currentDeck = null;
+                        currentCard = freeCards.GetFirstCard( false, cardRow * size + cardCol );
+                        currentDeck = freeCards;
                     }
                     break;
                 case "untouchedDeckPanel":
@@ -213,6 +213,28 @@ namespace Patriarchs
                 }
         }
 
+        private void UpdateFreeDeck( )
+        {
+            if( freeCards.CheckSize( ) == false )
+            {
+                Card card = null;
+                if( givingDeck.GetDeckSize( ) > 0 )
+                {
+                    card = givingDeck.GetFirstCard( true );
+                    untouchedDeckPanel.Children.Remove( card.CardControl );
+                }
+                else
+                    if( baseDeck.GetDeckSize( ) > 0 )
+                    {
+                        card = baseDeck.GetFirstCard(true);
+                        untouchedDeckPanel.Children.Remove(card.CardControl);
+                        SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
+                    }
+                freeCards.SetCard( card );
+
+            }
+        }
+
         private void CardCtrl_DropCard( object sender, CardLib.EventCardArgs e )
         {
             var card = sender as CardLib.CardCtrl;
@@ -240,7 +262,7 @@ namespace Patriarchs
                     }
                     break;
             };
-            
+            UpdateFreeDeck( );
         }
 
         private void BuildBaseDeck( )
@@ -279,12 +301,12 @@ namespace Patriarchs
 
         private void BuildFreeCards( )
         {
-            freeCards = new List<Card>( );
+            freeCards = new FreeDeck( );
             int rows = workSpaceGrid.RowDefinitions.Count;
             for( int i = 0; i < rows * rows; i++ )
             {
                 var card = baseDeck.GetFirstCard( true );
-                freeCards.Add( card );
+                
                 card.SetPathToImage( Properties.Resources.PathToCards
                                         + '/'
                                         + card.Suit
@@ -298,6 +320,8 @@ namespace Patriarchs
                 card.CardControl.MouseMove += CardCtrl_MouseMove;
                 card.CardControl.MouseUp += CardCtrl_MouseUp;
                 card.CardControl.DropCard += CardCtrl_DropCard;
+
+                freeCards.SetCard(card, i);
 
                 var parent = card.CardControl.Parent as Grid;
                 if( parent != null )

@@ -27,7 +27,7 @@ namespace Patriarchs.Model
             listOfCards = new List<Card>( );
         }
 
-        public Card GetFirstCard( bool isRemove )
+        public Card GetFirstCard( bool isRemove, int number = 0 )
         {
             var card = listOfCards.First();
             if( isRemove == true )
@@ -35,7 +35,7 @@ namespace Patriarchs.Model
             return card;
         }
 
-        public void SetCard( Card card )
+        public void SetCard( Card card, int number = 0 )
         {
             listOfCards.Insert( 0, card );
         }

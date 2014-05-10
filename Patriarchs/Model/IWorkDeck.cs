@@ -8,6 +8,6 @@ namespace Patriarchs.Model
 {
     interface IWorkDeck
     {
-        void SetCard( Card card );
+        void SetCard( Card card, int number );
     }
 }
