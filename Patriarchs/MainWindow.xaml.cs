@@ -230,8 +230,13 @@ namespace Patriarchs
                         untouchedDeckPanel.Children.Remove(card.CardControl);
                         SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
                     }
-                freeCards.SetCard( card );
 
+                AddToFree( card, -1 );
+
+                int number = freeCards.GetLastAdded();
+                workSpaceGrid.Children.Add( card.CardControl );
+                Grid.SetColumn( card.CardControl, number % workSpaceGrid.RowDefinitions.Count );
+                Grid.SetRow( card.CardControl, number / workSpaceGrid.RowDefinitions.Count );
             }
         }
 
@@ -306,22 +311,8 @@ namespace Patriarchs
             for( int i = 0; i < rows * rows; i++ )
             {
                 var card = baseDeck.GetFirstCard( true );
-                
-                card.SetPathToImage( Properties.Resources.PathToCards
-                                        + '/'
-                                        + card.Suit
-                                        + '/'
-                                        + card.Number.ToString( )
-                                        + ".png" );
 
-                card.CardControl.MouseUp -= untouchedCard_MouseUp;
-
-                card.CardControl.MouseDown += CardCtrl_MouseDown;
-                card.CardControl.MouseMove += CardCtrl_MouseMove;
-                card.CardControl.MouseUp += CardCtrl_MouseUp;
-                card.CardControl.DropCard += CardCtrl_DropCard;
-
-                freeCards.SetCard(card, i);
+                AddToFree( card, i );
 
                 var parent = card.CardControl.Parent as Grid;
                 if( parent != null )
@@ -333,6 +324,25 @@ namespace Patriarchs
                 Grid.SetRow( card.CardControl, i / rows );
             }
             SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
+        }
+
+        private void AddToFree( Card card, int number )
+        {
+            card.SetPathToImage(Properties.Resources.PathToCards
+                                        + '/'
+                                        + card.Suit
+                                        + '/'
+                                        + card.Number.ToString()
+                                        + ".png");
+
+            card.CardControl.MouseUp -= untouchedCard_MouseUp;
+
+            card.CardControl.MouseDown += CardCtrl_MouseDown;
+            card.CardControl.MouseMove += CardCtrl_MouseMove;
+            card.CardControl.MouseUp += CardCtrl_MouseUp;
+            card.CardControl.DropCard += CardCtrl_DropCard;
+
+            freeCards.SetCard(card, number);
         }
 
         private void SetFirstBaseCard( Card untouchedCard )

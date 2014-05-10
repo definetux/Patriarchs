@@ -11,10 +11,12 @@ namespace Patriarchs.Model
         const int FREE_CARDS_COUNT = 9;
 
         private List<Card> listOfCard;
+        private int lastAddedNumber;
 
         public FreeDeck()
         {
             listOfCard = new List<Card>();
+            lastAddedNumber = 0;
 
             for (int i = 0; i < FREE_CARDS_COUNT; i++)
                 listOfCard.Add( null );
@@ -46,16 +48,29 @@ namespace Patriarchs.Model
                         listOfCard[ i ] = null;
         }
 
-        public void SetCard(Card card, int number = -1)
+        public void SetCard( Card card, int number = -1 ) 
         {
-            if (number != -1)
+            if( number != -1 )
+            {
                 listOfCard[ number ] = card;
+                lastAddedNumber = number;
+            }
             else
             {
-                for( int i = 0; i < FREE_CARDS_COUNT; i++ )
+                for(int i = 0; i < FREE_CARDS_COUNT; i++ )
                     if( listOfCard[ i ] == null )
+                    {
                         listOfCard[ i ] = card;
+                        lastAddedNumber = i;
+                        break;
+                    }
             }
+
+        }
+
+        public int GetLastAdded( )
+        {
+            return lastAddedNumber;
         }
 
         public bool CheckSize()
