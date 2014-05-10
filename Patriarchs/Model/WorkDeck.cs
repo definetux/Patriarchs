@@ -37,7 +37,7 @@ namespace Patriarchs.Model
 
         public void SetCard( Card card )
         {
-            listOfCards.Add( card );
+            listOfCards.Insert( 0, card );
         }
 
         public int GetDeckSize( )

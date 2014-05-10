@@ -149,15 +149,20 @@ namespace Patriarchs
 
         private bool CheckLowerDeck( int row )
         {
-            var c = lowerDecks[ row ].GetFirstCard( false ).CardControl;
-            return CheckPosition( c );
+            var c = lowerDecks[ row ].GetFirstCard( false );
+            return CheckPosition( c.CardControl ) && ( CheckCardNumber( c ) == -1 );
 
         }
 
         private bool CheckUpperDeck( int row )
         {
-            var c = upperDecks[ row ].GetFirstCard( false ).CardControl;
-            return CheckPosition( c );
+            var c = upperDecks[ row ].GetFirstCard( false );
+            return CheckPosition( c.CardControl ) && ( CheckCardNumber( c ) == 1 ) ;
+        }
+
+        private int CheckCardNumber( Card card )
+        {
+            return currentCard.Number - card.Number;
         }
 
         private bool CheckPosition( IInputElement element )

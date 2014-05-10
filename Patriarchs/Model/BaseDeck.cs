@@ -10,6 +10,7 @@ namespace Patriarchs.Model
     {
         private List<Card> listOfCard;
         private string shirts;
+        private Random rand;
 
         public BaseDeck( int count, string shirts )
         {
@@ -17,7 +18,7 @@ namespace Patriarchs.Model
             this.shirts = shirts;
             string pathToImage = Properties.Resources.FullPathToShirts + shirts;
 
-            Random rand = new Random( );
+            rand = new Random( );
 
             List<List<int>> sequences = new List<List<int>>( );
 
@@ -33,19 +34,47 @@ namespace Patriarchs.Model
                 }
             }
 
+            int emptySeq = 0;
+
             for( int i = 0; i < count; i++ )
             {
                 int deckNumber = rand.Next( sequences.Count );
-                while( sequences.Count != 0 &&  sequences[ deckNumber ].Count == 0 )
+
+                foreach( var item in sequences )
                 {
-                    sequences.RemoveAt( deckNumber );
+                    if( item.Count == 0 )
+                        emptySeq++;
+                }
+
+                while( emptySeq != 8 &&  sequences[ deckNumber ].Count == 0 )
+                {
                     deckNumber++;
                     deckNumber %= sequences.Count;
                 }
 
                 int number = sequences[ deckNumber ].First( );
+
                 sequences[ deckNumber ].Remove( number );
-                string suit = WorkDeck.Suits[ deckNumber % 4 ];
+                string suit = "";
+                switch( deckNumber )
+                {
+                    case 0:
+                    case 1:
+                        suit = WorkDeck.Suits[ 0 ];
+                        break;
+                    case 2:
+                    case 3:
+                        suit = WorkDeck.Suits[ 1 ];
+                        break;
+                    case 4:
+                    case 5:
+                        suit = WorkDeck.Suits[ 2 ];
+                        break;
+                    case 6:
+                    case 7:
+                        suit = WorkDeck.Suits[ 3 ];
+                        break;
+                }
 
                 listOfCard.Add( new Card( number, suit, pathToImage ) );
             }
@@ -90,14 +119,12 @@ namespace Patriarchs.Model
             List<int> startSeq = new List<int>();
             List<int> resultSeq = new List<int>();
 
-            for( int i = 0; i < finish - start; i++ )
-                startSeq.Add( i + 1 );
-
-            Random rnd = new Random( );
+            for( int i = start; i < finish; i++ )
+                startSeq.Add( i );
 
             while( startSeq.Count != 0 )
             {
-                int item = rnd.Next( startSeq.Count );
+                int item = rand.Next( startSeq.Count );
                 resultSeq.Add( startSeq[ item ] );
                 startSeq.RemoveAt( item );
             }
