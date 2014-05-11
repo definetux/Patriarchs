@@ -21,7 +21,8 @@
                 <Menu Grid.ColumnSpan="4">
                     <MenuItem Header="Файл">
                         <MenuItem x:Name="mnuNewGame" Header="Новая игра"/>
-                        <MenuItem x:Name="mnuExit" Header="Выход" Click="mnuExit_Click"/>
+                    <MenuItem x:Name="mnuRestart" Header="Начать сначала"/>
+                    <MenuItem x:Name="mnuExit" Header="Выход" Click="mnuExit_Click"/>
                     </MenuItem>
                     <MenuItem Header="Игра">
                         <MenuItem x:Name="mnuRestore" Header="Восстановить"/>
@@ -31,10 +32,13 @@
                         <MenuItem x:Name="mnuBackgroundColor" Header="Цвет фона"/>
                         <MenuItem x:Name="mnuShirtColor" Header="Рубашка"/>
                     </MenuItem>
-                    <MenuItem Header="Помощь">
-                        <MenuItem x:Name="mnuRules" Header="Правила игры"/>
-                        <MenuItem x:Name="mnuAbout" Header="О программе"/>
+                    <MenuItem Header="Статистика">
+                        <MenuItem x:Name="mnuScores" Header="Количество баллов"/>
                     </MenuItem>
+                    <MenuItem Header="Помощь">
+                            <MenuItem x:Name="mnuRules" Header="Правила игры" Click="mnuRules_Click"/>
+                            <MenuItem x:Name="mnuAbout" Header="О программе"/>
+                        </MenuItem>
                 </Menu>
                 <Grid x:Name="workSpaceGrid" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Height="450">
                     <Grid.RowDefinitions>

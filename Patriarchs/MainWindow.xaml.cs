@@ -416,5 +416,11 @@ namespace Patriarchs
 
             SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
         }
+
+        private void mnuRules_Click( object sender, RoutedEventArgs e )
+        {
+            RulesWindow rulesWnd = new RulesWindow( );
+            rulesWnd.ShowDialog( );
+        }
     }
 }
