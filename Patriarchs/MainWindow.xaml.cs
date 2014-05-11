@@ -228,15 +228,19 @@ namespace Patriarchs
                     {
                         card = baseDeck.GetFirstCard(true);
                         untouchedDeckPanel.Children.Remove(card.CardControl);
-                        SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
+                        if( baseDeck.GetDeckSize() != 0 )
+                            SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
                     }
 
-                AddToFree( card, -1 );
+                if( card != null )
+                {
+                    AddToFree( card, -1 );
 
-                int number = freeCards.GetLastAdded();
-                workSpaceGrid.Children.Add( card.CardControl );
-                Grid.SetColumn( card.CardControl, number % workSpaceGrid.RowDefinitions.Count );
-                Grid.SetRow( card.CardControl, number / workSpaceGrid.RowDefinitions.Count );
+                    int number = freeCards.GetLastAdded( );
+                    workSpaceGrid.Children.Add( card.CardControl );
+                    Grid.SetColumn( card.CardControl, number % workSpaceGrid.RowDefinitions.Count );
+                    Grid.SetRow( card.CardControl, number / workSpaceGrid.RowDefinitions.Count );
+                }
             }
         }
 
@@ -272,7 +276,14 @@ namespace Patriarchs
 
         private void BuildBaseDeck( )
         {
-            baseDeck = new BaseDeck( CARDS_COUNT, Properties.Resources.PathToShirts );
+            try
+            {
+                baseDeck = new BaseDeck( CARDS_COUNT, Properties.Resources.PathToShirts );
+            }
+            catch( Exception e )
+            {
+                MessageBox.Show( e.Message );
+            }
             givingDeck = new GivingDeck( );
 
             SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
