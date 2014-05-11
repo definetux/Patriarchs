@@ -1,49 +1,50 @@
 ﻿<Window x:Name="window" x:Class="Patriarchs.RulesWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Правила игры" Height="570" Width="950" Background="#FF63FBE6" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Правила игры" Height="570" Width="950" Background="#FF63FBE6" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="ToolWindow">
 
     <Grid>
         <StackPanel>
-            <Label FontWeight="ExtraLight" FontSize="14">Цель игры:</Label>
+            <Label FontWeight="ExtraLight" FontSize="14" FontStyle="Italic">Цель игры:</Label>
             <StackPanel Orientation="Horizontal">
                 <Label Padding="20,5,5,5" FontWeight="ExtraLight" FontSize="14">Переместить все карты по</Label>
-                <Label FontWeight="Bold" FontSize="14" Foreground="#FF000BFB">основаниям</Label>
+                <TextBlock FontWeight="Bold" FontSize="14" Foreground="#FF000BFB" ToolTip="Основание - стопка, в которой карты должны расположиться&#13; в определенной последовательности для того, чтобы закончить игру.&#13; Основания, как правило, строится по возрастанию&#13; последовательность масти от туза до короля." MouseEnter="Label_Enter" MouseLeave="Label_Leave" VerticalAlignment="Center">основаниям</TextBlock>
             </StackPanel>
-            <Label FontWeight="ExtraLight" FontSize="14">Правила</Label>
-            <StackPanel Orientation="Horizontal">
-                <Label Padding="20,5,5,5" FontWeight="Bold" FontSize="14" Foreground="#FF000BFB">Начало:</Label>
+            <Label FontWeight="ExtraLight" FontSize="14" FontStyle="Italic">Правила</Label>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Label Padding="20,5,5,5" FontWeight="Bold" FontSize="14">Начало:</Label>
                 <Label FontWeight="ExtraLight" FontSize="14">В начале игры Туз и Король каждой</Label>
-                <Label FontWeight="Bold" FontSize="14" Foreground="#FF000BFB">масти</Label>
+                <TextBlock FontWeight="Bold" FontSize="14" Foreground="#FF000BFB" ToolTip="Масть - Есть четыре масти: червы, бубны, пики, трефы.&#13; Червы и бубны - красной масти; Трефы и Пики - черной масти." MouseEnter="Label_Enter" MouseLeave="Label_Leave" VerticalAlignment="Center">масти</TextBlock>
                 <Label FontWeight="ExtraLight" FontSize="14">располагаются в две</Label>
-                <Label FontWeight="Bold" FontSize="14" Foreground="#FF000BFB">колонки,</Label>
+                <TextBlock FontWeight="Bold" FontSize="14" Foreground="#FF000BFB" ToolTip="Колонка - линия перекрывающихся карт, одна под другой,&#13; проходящих вертикально на экране." MouseEnter="Label_Enter" MouseLeave="Label_Leave" VerticalAlignment="Center">колонки,</TextBlock>
                 <Label FontWeight="ExtraLight" FontSize="14">чтобы стать основаниями.</Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Padding="20,5,5,5" FontWeight="ExtraLight" FontSize="14">Основания (Восемь</Label>
-                <Label FontWeight="Bold" FontSize="14" Foreground="#FF000BFB">колод,</Label>
+                <TextBlock FontWeight="Bold" FontSize="14" Foreground="#FF000BFB" ToolTip="Стопка – набор карт, положенных друг на друга в компактную кучу." MouseEnter="Label_Enter" MouseLeave="Label_Leave" VerticalAlignment="Center">колод,</TextBlock>
                 <Label FontWeight="ExtraLight" FontSize="14">которые начинаются с четырех Тузов и четырех Королей):</Label>
             </StackPanel>
             <Label Padding="40,5,5,5" FontWeight="ExtraLight" FontSize="14">•	Основание "Туз": Строится от Туза до Короля, соответствующей масти. Например, 2  ♥ можно положить только на Туза  ♥.</Label>
             <Label Padding="40,5,5,5" FontWeight="ExtraLight" FontSize="14">•	Основание "Король": Строится от Короля до Туза, соответствующей масти. Например, Королеву  ♠ можно положить только на Короля  ♠.</Label>
-            <StackPanel Orientation="Horizontal">
-                <Label Padding="40,5,5,5" FontWeight="ExtraLight" FontSize="14">•	Перестановка: Когда верхние карты двух оснований одной масти в</Label>
-                <Label FontWeight="Bold" FontSize="14" Foreground="#FF000BFB">последовательности,</Label>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Padding="40,5,5,5" FontWeight="Bold" FontSize="14" Foreground="#FF000BFB" ToolTip="Перестановка – Когда верхние карты двух основания одной масти пересекаются,&#13; одну или несколько карт можно переместить из одного основания в другое,&#13; кроме Туза и Короля на дне основания." MouseEnter="Label_Enter" MouseLeave="Label_Leave">•	Перестановка:</TextBlock>
+                <Label FontWeight="ExtraLight" FontSize="14"> Когда верхние карты двух оснований одной масти в</Label>
+                <TextBlock FontWeight="Bold" FontSize="14" Foreground="#FF000BFB" ToolTip="Последовательность – набор карт, которые находятся&#13; в правильной последовательности масти или ранга." MouseEnter="Label_Enter" MouseLeave="Label_Leave" VerticalAlignment="Center">последовательности,</TextBlock>
                 <Label FontWeight="ExtraLight" FontSize="14">одну или несколько карт можно переместить</Label>
             </StackPanel>
             <Label Padding="20,5,5,5" FontWeight="ExtraLight" FontSize="14">из одного основания в другое, кроме Туза и Короля на дне основания.</Label>
             <StackPanel Orientation="Horizontal">
-                <Label Padding="20,5,5,5" FontWeight="Bold" FontSize="14" Foreground="#FF000BFB">Запас</Label>
+                <TextBlock Padding="20,5,5,5" FontWeight="Bold" FontSize="14" Foreground="#FF000BFB" ToolTip="Резерв - группа карт, которую сдают в начале игры,&#13; и перемещают в специальную часть макета." MouseEnter="Label_Enter" MouseLeave="Label_Leave">Резерв:</TextBlock>
                 <Label FontWeight="ExtraLight" FontSize="14">(Девять карт, расположенных в три строки по 3 карты):</Label>
             </StackPanel>
             <Label Padding="40,5,5,5" FontWeight="ExtraLight" FontSize="14">•	Эти карты доступны для игры с основаниями.</Label>
             <Label Padding="40,5,5,5" FontWeight="ExtraLight" FontSize="14">•	Каждая стопка может содержать только одну карту.</Label>
             <Label Padding="40,5,5,5" FontWeight="ExtraLight" FontSize="14">•	Пустые места автоматические заполняются из отходов или, если они пусты, из колоды.</Label>
-            <Label Padding="20,5,5,5" FontWeight="Bold" FontSize="14" Foreground="#FF000BFB">Колода</Label>
+            <TextBlock Padding="20,5,5,5" FontWeight="Bold" FontSize="14" Foreground="#FF000BFB" ToolTip="Запас - часть колоды, которая остается в начале игры после заполнения макета.&#13; Эти карты, как правило, лежат лицом вниз. Карты раздаются с запаса, как правило,&#13; по одному за раз, когда никакие дальнейшие действия невозможны." MouseEnter="Label_Enter" MouseLeave="Label_Leave">Запас:</TextBlock>
             <Label Padding="40,5,5,5" FontWeight="ExtraLight" FontSize="14">•	Переместите одну карту из колоды в отходы, кликнув на нее.</Label>
             <Label Padding="40,5,5,5" FontWeight="ExtraLight" FontSize="14">•	Разрешается одна пересдача (всего две сдачи).</Label>
             <StackPanel Orientation="Horizontal">
-                <Label Padding="20,5,5,5" FontWeight="Bold" FontSize="14" Foreground="#FF000BFB">Отходы</Label>
+                <TextBlock Padding="20,5,5,5" FontWeight="Bold" FontSize="14" Foreground="#FF000BFB" ToolTip="Отходы - карты, которые сдаются с запаса, размещаются,&#13; как правило, лицом вверх, в стопке отходов. Самая верхняя карта,&#13; как правило, доступна для игры, пока не будет покрыта следующей отбрасываемой." MouseEnter="Label_Enter" MouseLeave="Label_Leave">Отходы:</TextBlock>
                 <Label Padding="20,5,5,5" FontWeight="ExtraLight" FontSize="14">(Одна стопка):</Label>
             </StackPanel>
             <Label Padding="40,5,5,5" FontWeight="ExtraLight" FontSize="14">•	Верхняя карта всегда доступны для игры с основаниями.</Label>

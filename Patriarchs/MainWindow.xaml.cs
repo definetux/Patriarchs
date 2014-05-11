@@ -422,5 +422,11 @@ namespace Patriarchs
             RulesWindow rulesWnd = new RulesWindow( );
             rulesWnd.ShowDialog( );
         }
+
+        private void mnuAbout_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow aboutWnd = new AboutWindow();
+            aboutWnd.ShowDialog();
+        }
     }
 }
