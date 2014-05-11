@@ -59,10 +59,20 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DeskImageWindow.xaml.cs">
+      <DependentUpon>DeskImageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RulesWindow.xaml.cs">
       <DependentUpon>RulesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ShirtsWindow.xaml.cs">
+      <DependentUpon>ShirtsWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DeskImageWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -74,12 +84,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EventCardArgs.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RulesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ShirtsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -203,6 +216,36 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\Shirts\red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\Shirts\brown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\Shirts\orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\Shirts\green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cards\Shirts\violet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Desks\map.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Desks\ship.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Desks\suits.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Desks\green2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Desks\gray.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -42,6 +42,7 @@ namespace Patriarchs
         public MainWindow( )
         {
             InitializeComponent( );
+
             BuildBaseDeck( );
             BuildFreeCards( );
             BuildUpperDecks( );
@@ -278,7 +279,7 @@ namespace Patriarchs
         {
             try
             {
-                baseDeck = new BaseDeck( CARDS_COUNT, Properties.Resources.PathToShirts );
+                baseDeck = new BaseDeck( CARDS_COUNT, Properties.Settings.Default.Shirt );
             }
             catch( Exception e )
             {
@@ -427,6 +428,23 @@ namespace Patriarchs
         {
             AboutWindow aboutWnd = new AboutWindow();
             aboutWnd.ShowDialog();
+        }
+
+        private void mnuShirtColor_Click(object sender, RoutedEventArgs e)
+        {
+            ShirtsWindow shirtsWnd = new ShirtsWindow();
+            shirtsWnd.ShowDialog();
+            baseDeck.ChangeShirt();
+        }
+
+        private void mnuBackgroundColor_Click(object sender, RoutedEventArgs e)
+        {
+            DeskImageWindow deskImageWnd = new DeskImageWindow();
+            deskImageWnd.ShowDialog();
+            string path = "pack://application:,,," + Properties.Resources.PathToTableImage + Properties.Settings.Default.Desk;
+            Uri imageUri = new Uri(path, UriKind.Absolute);
+            BitmapImage imageBitmap = new BitmapImage(imageUri);
+            Background = new ImageBrush( imageBitmap );
         }
     }
 }
