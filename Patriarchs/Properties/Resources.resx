@@ -126,4 +126,7 @@
   <data name="PathToShirts" xml:space="preserve">
     <value>blue.png</value>
   </data>
+  <data name="PathToTableImage" xml:space="preserve">
+    <value>/Images/Desks/green.jpg</value>
+  </data>
 </root>
