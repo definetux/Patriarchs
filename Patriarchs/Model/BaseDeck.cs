@@ -34,11 +34,13 @@ namespace Patriarchs.Model
                 }
             }
 
-            int emptySeq = 0;
+            
 
             for( int i = 0; i < count; i++ )
             {
                 int deckNumber = rand.Next( sequences.Count );
+
+                int emptySeq = 0;
 
                 foreach( var item in sequences )
                 {
@@ -51,7 +53,6 @@ namespace Patriarchs.Model
                     deckNumber++;
                     deckNumber %= sequences.Count;
                 }
-
                 int number = sequences[ deckNumber ].First( );
 
                 sequences[ deckNumber ].Remove( number );

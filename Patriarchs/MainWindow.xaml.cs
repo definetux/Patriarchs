@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -21,7 +22,7 @@ namespace Patriarchs
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
         const double CARD_WIDTH = 90;
         const double CARD_HEIGHT = 130;
@@ -37,15 +38,27 @@ namespace Patriarchs
         private Card currentCard;
         private IDeck currentDeck;
         private FreeDeck freeCards;
+        private bool isDoubleClick;
+        private int scores;
+        private DateTime currentTime;
+        private System.Windows.Threading.DispatcherTimer dispatcherTimer;
 
         private TranslateTransform currentTransform;
 
         public MainWindow( )
         {
-            InitializeComponent( );
+            scores = -150;
+            isDoubleClick = false;
+            currentTime = new DateTime( );
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+            dispatcherTimer.Interval = new TimeSpan(0,0,1);
+            dispatcherTimer.Start();
 
             MP3Player.MP3Player.OpenPlayer( Environment.CurrentDirectory + "\\Sounds\\card_flip2.mp3" );
             MP3Player.MP3Player.SetVolume( 100 );
+
+            InitializeComponent( );
 
             string path = "pack://application:,,," + Properties.Resources.PathToTableImage + Properties.Settings.Default.Desk;
             Uri imageUri = new Uri( path, UriKind.Absolute );
@@ -53,13 +66,49 @@ namespace Patriarchs
             Background = new ImageBrush( imageBitmap );
 
             path = Properties.Settings.Default.PlayerImage;
-            imgPhoto.Source = new BitmapImage( new Uri( path ) );
+            if( path != String.Empty )
+                imgPhoto.Source = new BitmapImage( new Uri( path ) );
+            else
+                imgPhoto.Source = new BitmapImage( new Uri( Properties.Resources.PathToPlayerImage, UriKind.Relative ) );
             tbName.Text = Properties.Settings.Default.PlayerName;
 
             BuildBaseDeck( );
             BuildFreeCards( );
             BuildUpperDecks( );
             BuildLowerDecks( );
+        }
+
+        public int Scores
+        {
+            get
+            {
+                return scores;
+            }
+            set
+            {
+                scores = value;
+                OnPropertyChanged( "Scores" );
+            }
+        }
+
+        public string Time
+        {
+            get;
+            set;
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            currentTime = currentTime.AddSeconds( 1 );
+            Time = currentTime.TimeOfDay.ToString();
+            OnPropertyChanged( "Time" );
+        }   
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged( string info )
+        {
+            if( PropertyChanged != null )
+                PropertyChanged( this, new PropertyChangedEventArgs( info ) );
         }
 
         private void mnuExit_Click( object sender, RoutedEventArgs e )
@@ -69,6 +118,14 @@ namespace Patriarchs
 
         private void CardCtrl_MouseDown( object sender, MouseButtonEventArgs e )
         {
+            if( e.ChangedButton == MouseButton.Left && e.ClickCount == 2 )
+            {
+                var c = sender as CardLib.CardCtrl;
+                isDoubleClick = true;
+                c.OnDropCard( c, new CardLib.EventCardArgs( currentCard.Number, currentCard.Suit ) );
+                return;
+            }
+
             var element = sender as FrameworkElement;
             m_anchorPoint = e.GetPosition( null );
             element.CaptureMouse( );
@@ -185,6 +242,9 @@ namespace Patriarchs
 
         private bool CheckPosition( IInputElement element )
         {
+            if( isDoubleClick == true )
+                return true;
+
             Point p = Mouse.GetPosition( element );
 
             if( p.X > 0 && p.X < CARD_WIDTH && p.Y > 0 && p.Y < CARD_HEIGHT )
@@ -197,6 +257,9 @@ namespace Patriarchs
         {
             if( currentDeck != null )
                 currentDeck.RemoveCard( currentCard );
+
+            if( !( currentDeck is ToUpperDeck ) && !( currentDeck is ToLowerDeck ) )
+                IncreaseScores( );
             deck.SetCard( currentCard );
         }
 
@@ -205,8 +268,14 @@ namespace Patriarchs
             SetCurrentCard( upperDecks[ row ] );
             parent.Children.Remove( card );
             acesDeckPanel.Children.Add( card );
+
             Grid.SetRow( card, row );
             Grid.SetColumn( card, row );
+        }
+
+        private void IncreaseScores( )
+        {
+            Scores += 20;
         }
 
         private void AddToLower( int row, Grid parent, CardLib.CardCtrl card )
@@ -214,6 +283,7 @@ namespace Patriarchs
             SetCurrentCard( lowerDecks[ row ] );
             parent.Children.Remove( card );
             kingsDeckPanel.Children.Add( card );
+
             Grid.SetRow( card, row );
             Grid.SetColumn( card, row );
         }
@@ -292,6 +362,7 @@ namespace Patriarchs
             };
 
             UpdateFreeDeck( );
+            isDoubleClick = false;
         }
 
         private void BuildBaseDeck( )
@@ -374,6 +445,11 @@ namespace Patriarchs
             card.CardControl.DropCard += CardCtrl_DropCard;
 
             freeCards.SetCard(card, number);
+        }
+
+        void CardControl_MouseClick( object sender, CardLib.EventCardArgs e )
+        {
+            throw new NotImplementedException( );
         }
 
         private void SetFirstBaseCard( Card untouchedCard )

@@ -88,6 +88,15 @@ namespace Patriarchs.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to /Images/player.jpg.
+        /// </summary>
+        internal static string PathToPlayerImage {
+            get {
+                return ResourceManager.GetString("PathToPlayerImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to red.png.
         /// </summary>
         internal static string PathToShirts {

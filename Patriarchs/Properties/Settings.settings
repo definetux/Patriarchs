@@ -9,7 +9,7 @@
       <Value Profile="(Default)">green.jpg</Value>
     </Setting>
     <Setting Name="PlayerImage" Type="System.String" Scope="User">
-      <Value Profile="(Default)">/Images/player.jpg</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="PlayerName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Player 1</Value>

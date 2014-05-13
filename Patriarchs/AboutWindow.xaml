@@ -20,7 +20,7 @@
             <ColumnDefinition Width="115*"/>
             <ColumnDefinition Width="177*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="ExtraLight" Text="Пасьянс &quot;Патриархи&quot;" RenderTransformOrigin="0.5,0.5" Margin="12,30,183,60" Grid.RowSpan="2" Foreground="Blue" FontFamily="Segoe Script">
+        <TextBlock Grid.Column="0" Grid.ColumnSpan="2" FontSize="20" FontWeight="ExtraLight" Text="Пасьянс &quot;Патриархи&quot;" RenderTransformOrigin="0.5,0.5" Margin="18,35,170,55" Grid.RowSpan="2" Foreground="Blue" FontFamily="Segoe Script">
             <TextBlock.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
