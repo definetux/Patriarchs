@@ -76,6 +76,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="WelcomeWindow.xaml.cs">
+      <DependentUpon>WelcomeWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -93,6 +96,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ShirtsWindow.xaml">
+    <Page Include="WelcomeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -207,6 +211,10 @@
       <Project>{01032bfa-7644-4436-bb2d-cc44bb2e3a35}</Project>
       <Name>CardLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MP3Player\MP3Player.csproj">
+      <Project>{cb4c73d7-b6cc-480f-982f-b52f543cab29}</Project>
+      <Name>MP3Player</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Cards\none.png" />
@@ -246,6 +254,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Desks\gray.jpg" />
+    <Content Include="Sounds\intro.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
