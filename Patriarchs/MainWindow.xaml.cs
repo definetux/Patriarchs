@@ -38,7 +38,6 @@ namespace Patriarchs
         private IDeck currentDeck;
         private FreeDeck freeCards;
 
-
         private TranslateTransform currentTransform;
 
         public MainWindow( )
@@ -52,6 +51,10 @@ namespace Patriarchs
             Uri imageUri = new Uri( path, UriKind.Absolute );
             BitmapImage imageBitmap = new BitmapImage( imageUri );
             Background = new ImageBrush( imageBitmap );
+
+            path = Properties.Settings.Default.PlayerImage;
+            imgPhoto.Source = new BitmapImage( new Uri( path ) );
+            tbName.Text = Properties.Settings.Default.PlayerName;
 
             BuildBaseDeck( );
             BuildFreeCards( );

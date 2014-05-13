@@ -39,6 +39,8 @@ namespace Patriarchs
             ShirtsWindow shirtWnd = new ShirtsWindow( );
             shirtWnd.ShowDialog( );
 
+            AddPhotoWindow photoWnd = new AddPhotoWindow( );
+            photoWnd.ShowDialog( );
 
             MP3Player.MP3Player.ClosePlayer( );
             MainWindow mainWnd = new MainWindow( );

@@ -123,6 +123,9 @@
   <data name="PathToCards" xml:space="preserve">
     <value>/Images/Cards</value>
   </data>
+  <data name="PathToImages" xml:space="preserve">
+    <value>/Images/</value>
+  </data>
   <data name="PathToShirts" xml:space="preserve">
     <value>red.png</value>
   </data>

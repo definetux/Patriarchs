@@ -46,5 +46,29 @@ namespace Patriarchs.Properties {
                 this["Desk"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/Images/player.jpg")]
+        public string PlayerImage {
+            get {
+                return ((string)(this["PlayerImage"]));
+            }
+            set {
+                this["PlayerImage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Player 1")]
+        public string PlayerName {
+            get {
+                return ((string)(this["PlayerName"]));
+            }
+            set {
+                this["PlayerName"] = value;
+            }
+        }
     }
 }

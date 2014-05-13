@@ -59,6 +59,9 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddPhotoWindow.xaml.cs">
+      <DependentUpon>AddPhotoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DeskImageWindow.xaml.cs">
       <DependentUpon>DeskImageWindow.xaml</DependentUpon>
     </Compile>
@@ -72,6 +75,10 @@
       <DependentUpon>WelcomeWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddPhotoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -260,6 +267,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\intro.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\player.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
