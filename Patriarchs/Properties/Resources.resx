@@ -124,9 +124,9 @@
     <value>/Images/Cards</value>
   </data>
   <data name="PathToShirts" xml:space="preserve">
-    <value>red.png</value>
+    <value>blue.png</value>
   </data>
   <data name="PathToTableImage" xml:space="preserve">
-    <value>/Images/Desks/</value>
+    <value>/Images/Desks/green.jpg</value>
   </data>
 </root>

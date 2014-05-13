@@ -4,7 +4,7 @@
         xmlns:cardTemplate="clr-namespace:CardLib;assembly=CardLib"
         Title="Патриархи" Height="680" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Icon="logo.ico">
     <Window.Background>
-        <ImageBrush x:Name="WindowBrush" ImageSource="Images/Desks/green.jpg"/>
+        <ImageBrush ImageSource="Images/Desks/green.jpg"/>
     </Window.Background>
         <Canvas x:Name="deskCanvas">
             <Grid x:Name="deskGrid" Width="{Binding ActualWidth, ElementName=deskCanvas, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=deskCanvas, Mode=OneWay}">
@@ -29,8 +29,8 @@
                         <MenuItem x:Name="mnuCancel" Header="Отменить"/>
                     </MenuItem>
                     <MenuItem Header="Параметры">
-                        <MenuItem x:Name="mnuBackgroundColor" Header="Цвет фона" Click="mnuBackgroundColor_Click"/>
-                        <MenuItem x:Name="mnuShirtColor" Header="Рубашка" Click="mnuShirtColor_Click"/>
+                        <MenuItem x:Name="mnuBackgroundColor" Header="Цвет фона"/>
+                        <MenuItem x:Name="mnuShirtColor" Header="Рубашка"/>
                     </MenuItem>
                     <MenuItem Header="Статистика">
                         <MenuItem x:Name="mnuScores" Header="Количество баллов"/>

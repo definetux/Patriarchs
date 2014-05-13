@@ -131,14 +131,5 @@ namespace Patriarchs.Model
 
             return resultSeq;
         }
-
-        public void ChangeShirt()
-        {
-            shirts = Properties.Settings.Default.Shirt;
-            foreach (var item in listOfCard)
-            {
-                item.SetPathToImage(Properties.Resources.FullPathToShirts + shirts);
-            }
-        }
     }
 }

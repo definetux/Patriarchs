@@ -59,14 +59,8 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DeskImageWindow.xaml.cs">
-      <DependentUpon>DeskImageWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="RulesWindow.xaml.cs">
       <DependentUpon>RulesWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ShirtsWindow.xaml.cs">
-      <DependentUpon>ShirtsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="AboutWindow.xaml">
       <SubType>Designer</SubType>
@@ -87,6 +81,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="EventCardArgs.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
