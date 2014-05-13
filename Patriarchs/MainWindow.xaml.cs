@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -42,6 +44,10 @@ namespace Patriarchs
         public MainWindow( )
         {
             InitializeComponent( );
+
+            MP3Player.MP3Player.OpenPlayer( Environment.CurrentDirectory + "\\Sounds\\card_flip2.mp3" );
+            MP3Player.MP3Player.SetVolume( 100 );
+
             string path = "pack://application:,,," + Properties.Resources.PathToTableImage + Properties.Settings.Default.Desk;
             Uri imageUri = new Uri( path, UriKind.Absolute );
             BitmapImage imageBitmap = new BitmapImage( imageUri );
@@ -70,6 +76,7 @@ namespace Patriarchs
             var parent = card.Parent as Grid;
             Canvas.SetZIndex( parent, 1000 );
             Canvas.SetZIndex( card, 1001 );
+
 
             SetCurrentCard( card );
         }
@@ -108,6 +115,9 @@ namespace Patriarchs
 
                 card.OnDropCard( card, new CardLib.EventCardArgs( currentCard.Number, currentCard.Suit ) );
             }
+
+            MP3Player.MP3Player.Play( new WindowInteropHelper( this ).Handle );
+
         }
 
         private void CardCtrl_CardDropped( object sender, CardLib.EventCardArgs e )
@@ -253,6 +263,7 @@ namespace Patriarchs
         {
             var card = sender as CardLib.CardCtrl;
             var cardParent = card.Parent as Grid;
+
             switch( e.Suit )
             {
                 case "Hearts":
@@ -276,6 +287,7 @@ namespace Patriarchs
                     }
                     break;
             };
+
             UpdateFreeDeck( );
         }
 

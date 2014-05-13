@@ -8,7 +8,8 @@
             <RowDefinition Height="5*"/>
         </Grid.RowDefinitions>
         <Image Source="/Images/intro.jpg" Stretch="Fill"/>
-        <Button x:Name="btnNext" Grid.Row="1" Content="Next" Click="btnNext_Click" BorderBrush="{x:Null}">
+        <Button x:Name="btnNext" Grid.Row="1" Content="Далее" Click="btnNext_Click" BorderBrush="{x:Null}" FontFamily="Segoe Script" FontSize="30" FontWeight="ExtraLight">
+            
             <Button.Background>
                 <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                     <GradientStop Color="#FFF3F3F3" Offset="1"/>
