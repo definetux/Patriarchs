@@ -23,17 +23,25 @@ namespace Patriarchs
         public WelcomeWindow( )
         {
             InitializeComponent( );
+
             string path = Environment.CurrentDirectory + "\\Sounds\\intro.mp3";
             if( MP3Player.MP3Player.OpenPlayer( path ) == false )
                 return;
-            if( MP3Player.MP3Player.Play( new WindowInteropHelper(this).Handle ) == false )
-                return;
+            if( MP3Player.MP3Player.Play( new WindowInteropHelper( this ).Handle ) == false )
+                    return;
         }
 
-        private void Button_Click_1( object sender, RoutedEventArgs e )
+        private void btnNext_Click( object sender, RoutedEventArgs e )
         {
+            DeskImageWindow deskWnd = new DeskImageWindow( );
+            deskWnd.ShowDialog( );
+
+            ShirtsWindow shirtWnd = new ShirtsWindow( );
+            shirtWnd.ShowDialog( );
+
             MainWindow mainWnd = new MainWindow( );
             mainWnd.Show( );
+            MP3Player.MP3Player.StopPlayer( );
             this.Close( );
         }
     }

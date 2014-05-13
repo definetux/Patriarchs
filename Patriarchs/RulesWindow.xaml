@@ -3,9 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Правила игры" Height="570" Width="950" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="ToolWindow">
     <Window.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="White" Offset="0.372"/>
-            <GradientStop Color="#FF00FFF3" Offset="1"/>
+        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFF3F3F3" Offset="1"/>
+            <GradientStop Color="#FFF99956" Offset="0.502"/>
+            <GradientStop Color="#FFDDDDDD" Offset="1"/>
+            <GradientStop Color="#FFC17743" Offset="0.351"/>
         </LinearGradientBrush>
     </Window.Background>
     <Grid>

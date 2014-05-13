@@ -4,7 +4,7 @@
         xmlns:cardTemplate="clr-namespace:CardLib;assembly=CardLib"
         Title="Патриархи" Height="680" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Icon="logo.ico">
     <Window.Background>
-        <ImageBrush x:Name="WindowBrush" ImageSource="Images/Desks/green.jpg"/>
+        <ImageBrush x:Name="WindowBrush"/>
     </Window.Background>
         <Canvas x:Name="deskCanvas">
             <Grid x:Name="deskGrid" Width="{Binding ActualWidth, ElementName=deskCanvas, Mode=OneWay}" Height="{Binding ActualHeight, ElementName=deskCanvas, Mode=OneWay}">

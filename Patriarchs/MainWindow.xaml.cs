@@ -42,6 +42,10 @@ namespace Patriarchs
         public MainWindow( )
         {
             InitializeComponent( );
+            string path = "pack://application:,,," + Properties.Resources.PathToTableImage + Properties.Settings.Default.Desk;
+            Uri imageUri = new Uri( path, UriKind.Absolute );
+            BitmapImage imageBitmap = new BitmapImage( imageUri );
+            Background = new ImageBrush( imageBitmap );
 
             BuildBaseDeck( );
             BuildFreeCards( );
