@@ -23,11 +23,11 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.ColumnSpan="3" Grid.Column="0" Grid.Row="0" Text="Выберите рубашку" FontSize="25" FontWeight="ExtraLight" Margin="20,10,0,0" FontFamily="Segoe Script" Foreground="White"/>
-        <cardTemplate:CardCtrl Margin="10" Grid.Column="0" Grid.Row="1" ImgSource="/Images/Cards/Shirts/blue.png" MouseUp="CardCtrl_MouseUp"/>
-        <cardTemplate:CardCtrl Margin="10" Grid.Column="1" Grid.Row="1" ImgSource="/Images/Cards/Shirts/red.png" MouseUp="CardCtrl_MouseUp"/>
-        <cardTemplate:CardCtrl Margin="10" Grid.Column="2" Grid.Row="1" ImgSource="/Images/Cards/Shirts/orange.png" MouseUp="CardCtrl_MouseUp"/>
-        <cardTemplate:CardCtrl Margin="10" Grid.Column="0" Grid.Row="2" ImgSource="/Images/Cards/Shirts/green.png" MouseUp="CardCtrl_MouseUp"/>
-        <cardTemplate:CardCtrl Margin="10" Grid.Column="1" Grid.Row="2" ImgSource="/Images/Cards/Shirts/brown.png" MouseUp="CardCtrl_MouseUp"/>
-        <cardTemplate:CardCtrl Margin="10" Grid.Column="2" Grid.Row="2" ImgSource="/Images/Cards/Shirts/violet.png" MouseUp="CardCtrl_MouseUp"/>
+        <cardTemplate:CardCtrl Margin="10" Grid.Column="0" Grid.Row="1" ImgSource="/Images/Cards/Shirts/back_violet.jpg" MouseUp="CardCtrl_MouseUp"/>
+        <cardTemplate:CardCtrl Margin="10" Grid.Column="1" Grid.Row="1" ImgSource="/Images/Cards/Shirts/back_women.jpg" MouseUp="CardCtrl_MouseUp"/>
+        <cardTemplate:CardCtrl Margin="10" Grid.Column="2" Grid.Row="1" ImgSource="/Images/Cards/Shirts/back_man.jpg" MouseUp="CardCtrl_MouseUp"/>
+        <cardTemplate:CardCtrl Margin="10" Grid.Column="0" Grid.Row="2" ImgSource="/Images/Cards/Shirts/back_red.jpg" MouseUp="CardCtrl_MouseUp"/>
+        <cardTemplate:CardCtrl Margin="10" Grid.Column="1" Grid.Row="2" ImgSource="/Images/Cards/Shirts/back_blue.jpg" MouseUp="CardCtrl_MouseUp"/>
+        <cardTemplate:CardCtrl Margin="10" Grid.Column="2" Grid.Row="2" ImgSource="/Images/Cards/Shirts/back_yellow.jpg" MouseUp="CardCtrl_MouseUp"/>
     </Grid>
 </Window>

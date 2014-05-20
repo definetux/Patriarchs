@@ -99,7 +99,7 @@
                 <TextBlock Margin="10,0,0,0" Text="{Binding Path=Scores, ElementName=Binding, Mode=OneWay}"/>
                 <Separator/>
                 <TextBlock Text="Собранные колоды:"/>
-                
+                <TextBlock Margin="10,0,0,0" Text="{Binding Path=FullDeck, ElementName=Binding, Mode=OneWay}"/>
                 <Separator/>
                 <TextBlock Text="Текущее время:"/>
                 <TextBlock Margin="10,0,0,0" Text="{Binding Path=Time, ElementName=Binding, Mode=OneWay}" />

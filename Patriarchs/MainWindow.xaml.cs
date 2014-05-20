@@ -26,7 +26,9 @@ namespace Patriarchs
     {
         const double CARD_WIDTH = 90;
         const double CARD_HEIGHT = 130;
-        const int CARDS_COUNT = 96; // 408
+        const int CARDS_COUNT = 96;
+        const int FULL_DECK = 13;
+        const int WIN_COUNT = 8;
 
         private Point m_anchorPoint;
         private Point m_currentPoint;
@@ -42,12 +44,14 @@ namespace Patriarchs
         private int scores;
         private DateTime currentTime;
         private System.Windows.Threading.DispatcherTimer dispatcherTimer;
+        private int fullDecks;
 
         private TranslateTransform currentTransform;
 
         public MainWindow( )
         {
             scores = -150;
+            fullDecks = 0;
             isDoubleClick = false;
             currentTime = new DateTime( );
             dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
@@ -91,6 +95,21 @@ namespace Patriarchs
             }
         }
 
+        public int FullDeck
+        {
+            get
+            {
+                return fullDecks;
+            }
+            set
+            {
+                fullDecks = value;
+                OnPropertyChanged( "FullDeck" );
+                if( fullDecks == WIN_COUNT )
+                    MessageBox.Show( "gz" );
+            }
+        }
+
         public string Time
         {
             get;
@@ -118,11 +137,12 @@ namespace Patriarchs
 
         private void CardCtrl_MouseDown( object sender, MouseButtonEventArgs e )
         {
+            CardLib.CardCtrl card = sender as CardLib.CardCtrl;
+            SetCurrentCard( card );
             if( e.ChangedButton == MouseButton.Left && e.ClickCount == 2 )
             {
-                var c = sender as CardLib.CardCtrl;
                 isDoubleClick = true;
-                c.OnDropCard( c, new CardLib.EventCardArgs( currentCard.Number, currentCard.Suit ) );
+                card.OnDropCard( card, new CardLib.EventCardArgs( currentCard.Number, currentCard.Suit ) );
                 return;
             }
 
@@ -132,13 +152,10 @@ namespace Patriarchs
             isDrag = true;
             e.Handled = true;
             currentTransform = new TranslateTransform( );
-            CardLib.CardCtrl card = sender as CardLib.CardCtrl;
             var parent = card.Parent as Grid;
             Canvas.SetZIndex( parent, 1000 );
             Canvas.SetZIndex( card, 1001 );
 
-
-            SetCurrentCard( card );
         }
 
         private void CardCtrl_MouseMove( object sender, MouseEventArgs e )
@@ -169,11 +186,13 @@ namespace Patriarchs
                 currentTransform.Y = 0;
 
                 CardLib.CardCtrl card = sender as CardLib.CardCtrl;
+
+                card.OnDropCard( card, new CardLib.EventCardArgs( currentCard.Number, currentCard.Suit ) );
+
                 var parent = card.Parent as Grid;
                 Canvas.SetZIndex( parent, 0 );
                 Canvas.SetZIndex( card, 0 );
 
-                card.OnDropCard( card, new CardLib.EventCardArgs( currentCard.Number, currentCard.Suit ) );
             }
 
             MP3Player.MP3Player.Play( new WindowInteropHelper( this ).Handle );
@@ -256,11 +275,17 @@ namespace Patriarchs
         private void SetCurrentCard( WorkDeck deck )
         {
             if( currentDeck != null )
+            {
                 currentDeck.RemoveCard( currentCard );
+            }
 
             if( !( currentDeck is ToUpperDeck ) && !( currentDeck is ToLowerDeck ) )
                 IncreaseScores( );
+
             deck.SetCard( currentCard );
+
+            if( deck.GetDeckSize( ) == FULL_DECK )
+                FullDeck++;
         }
 
         private void AddToUpper( int row, Grid parent, CardLib.CardCtrl card )

@@ -1,0 +1,20 @@
+﻿<Window x:Class="Patriarchs.WinningWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="WinningWindow" Height="300" Width="343.956" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFF3F3F3" Offset="1"/>
+            <GradientStop Color="#FFF99956" Offset="0.502"/>
+            <GradientStop Color="#FFDDDDDD" Offset="1"/>
+            <GradientStop Color="#FFC17743" Offset="0.351"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <StackPanel>
+            <Image Source="/Images/win.png"/>
+            <Button x:Name="btn_showScores" Content="Показать турнирную таблицу" Height="61" HorizontalAlignment="Center" BorderBrush="Black" FontSize="16" FontWeight="ExtraLight" FontFamily="Segoe Script" Foreground="Black" Click="btn_showScores_Click" Background="{x:Null}">
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
