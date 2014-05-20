@@ -1,0 +1,29 @@
+﻿<Window x:Class="Patriarchs.ScoresWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ScoresWindow" Height="300" Width="347.253" WindowStyle="None" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" BorderBrush="Black" BorderThickness="3">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+            <GradientStop Color="#FFF3F3F3" Offset="1"/>
+            <GradientStop Color="#FFF99956" Offset="0.502"/>
+            <GradientStop Color="#FFDDDDDD" Offset="1"/>
+            <GradientStop Color="#FFC17743" Offset="0.351"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="Лучшие результаты" FontSize="25" FontWeight="ExtraLight" Margin="20,10,0,0" FontFamily="Segoe Script" Foreground="White"/>
+            <DataGrid x:Name="gridScores" Margin="0" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" Background="{x:Null}" CanUserResizeColumns="False" CanUserResizeRows="False" ColumnWidth="*" Height="175"/>
+            <Button x:Name="Next" Content="Закрыть" Margin="0, 20, 0, 0" FontFamily="Segoe Script" FontSize="25" HorizontalAlignment="Center" Click="Next_Click">
+                <Button.Background>
+                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                        <GradientStop Color="#FFF3F3F3" Offset="1"/>
+                        <GradientStop Color="#FFF99956" Offset="0.502"/>
+                        <GradientStop Color="#FFDDDDDD" Offset="1"/>
+                        <GradientStop Color="#FFC17743" Offset="0.351"/>
+                    </LinearGradientBrush>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -68,6 +68,9 @@
     <Compile Include="RulesWindow.xaml.cs">
       <DependentUpon>RulesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ScoresWindow.xaml.cs">
+      <DependentUpon>ScoresWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShirtsWindow.xaml.cs">
       <DependentUpon>ShirtsWindow.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="RulesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ScoresWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -288,6 +295,22 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\win.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ToolBar\Quick_restart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ToolBar\New_game.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ToolBar\FastBack.png" />
+    <Resource Include="Images\ToolBar\FastForward.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ToolBar\start.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\ToolBar\save.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

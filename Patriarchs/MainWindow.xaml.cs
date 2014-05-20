@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -105,8 +106,21 @@ namespace Patriarchs
             {
                 fullDecks = value;
                 OnPropertyChanged( "FullDeck" );
-                if( fullDecks == WIN_COUNT )
-                    MessageBox.Show( "gz" );
+                if( fullDecks > 0 )
+                {
+                    btnSaveGame.IsEnabled = true;
+                    btnSaveGame.Background = Brushes.Aquamarine;
+                    if( fullDecks == FULL_DECK )
+                    {
+                        SaveResult( );
+                        WinningWindow winWnd = new WinningWindow( );
+                        winWnd.ShowDialog( );
+
+                        ScoresWindow scoresWnd = new ScoresWindow( );
+                        scoresWnd.ShowDialog( );
+                    }
+                }
+
             }
         }
 
@@ -565,6 +579,29 @@ namespace Patriarchs
             Uri imageUri = new Uri(path, UriKind.Absolute);
             BitmapImage imageBitmap = new BitmapImage(imageUri);
             Background = new ImageBrush( imageBitmap );
+        }
+
+        private void SaveResult( )
+        {
+            StreamWriter sw =  File.AppendText( "scores.txt" );
+            sw.WriteLine( "{0}|{1}|{2}", Properties.Settings.Default.PlayerName, Time, Scores.ToString( ) );
+            sw.Close( );
+        }
+
+        private void btnSaveGame_Click( object sender, RoutedEventArgs e )
+        {
+            SaveResult( );
+        }
+
+        private void mnuSave_Click( object sender, RoutedEventArgs e )
+        {
+            SaveResult( );
+        }
+
+        private void mnuScores_Click( object sender, RoutedEventArgs e )
+        {
+            ScoresWindow scoresWnd = new ScoresWindow( );
+            scoresWnd.ShowDialog( );
         }
     }
 }

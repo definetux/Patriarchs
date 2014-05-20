@@ -17,33 +17,57 @@
                     <ColumnDefinition Width="100*"/>
             </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="50"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
-                <Menu Grid.ColumnSpan="5">
-                    <MenuItem Header="Файл">
-                        <MenuItem x:Name="mnuNewGame" Header="Новая игра"/>
-                    <MenuItem x:Name="mnuRestart" Header="Начать сначала"/>
-                    <MenuItem x:Name="mnuExit" Header="Выход" Click="mnuExit_Click"/>
-                    </MenuItem>
-                    <MenuItem Header="Игра">
-                        <MenuItem x:Name="mnuRestore" Header="Восстановить"/>
-                        <MenuItem x:Name="mnuCancel" Header="Отменить"/>
-                    </MenuItem>
-                    <MenuItem Header="Параметры">
-                        <MenuItem x:Name="mnuBackgroundColor" Header="Цвет фона" Click="mnuBackgroundColor_Click"/>
-                        <MenuItem x:Name="mnuShirtColor" Header="Рубашка" Click="mnuShirtColor_Click"/>
-                    </MenuItem>
-                    <MenuItem Header="Статистика">
-                        <MenuItem x:Name="mnuScores" Header="Количество баллов"/>
-                    </MenuItem>
-                    <MenuItem Header="Помощь">
-                            <MenuItem x:Name="mnuRules" Header="Правила игры" Click="mnuRules_Click"/>
-                            <MenuItem x:Name="mnuAbout" Header="О программе" Click="mnuAbout_Click"/>
+                <Grid Grid.ColumnSpan="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                    <Menu>
+                        <MenuItem Header="Файл">
+                            <MenuItem x:Name="mnuNewGame" Header="Новая игра"/>
+                        <MenuItem x:Name="mnuRestart" Header="Начать сначала"/>
+                        <MenuItem x:Name="mnuExit" Header="Выход" Click="mnuExit_Click"/>
                         </MenuItem>
-                </Menu>
-                <Grid x:Name="workSpaceGrid" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Height="450">
+                        <MenuItem Header="Игра">
+                            <MenuItem x:Name="mnuRestore" Header="Восстановить"/>
+                            <MenuItem x:Name="mnuCancel" Header="Отменить"/>
+                        </MenuItem>
+                        <MenuItem Header="Параметры">
+                            <MenuItem x:Name="mnuBackgroundColor" Header="Цвет фона" Click="mnuBackgroundColor_Click"/>
+                            <MenuItem x:Name="mnuShirtColor" Header="Рубашка" Click="mnuShirtColor_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="Статистика">
+                            <MenuItem x:Name="mnuSave" Header="Сохранить результат" Click="mnuSave_Click"/>
+                            <MenuItem x:Name="mnuScores" Header="Количество баллов" Click="mnuScores_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="Помощь">
+                                <MenuItem x:Name="mnuRules" Header="Правила игры" Click="mnuRules_Click"/>
+                                <MenuItem x:Name="mnuAbout" Header="О программе" Click="mnuAbout_Click"/>
+                            </MenuItem>
+                    </Menu>
+                <ToolBar Grid.Row="1" IsHitTestVisible="True">
+                    <Button x:Name="btnNewGame" Margin="0, 0, 10, 0">
+                        <Image Source="/Images/ToolBar/New_game.png" ToolTip="Новая игра"/>
+                    </Button>
+                    <Button x:Name="btnRestartGame" Margin="0, 0, 10, 0">
+                        <Image Source="/Images/ToolBar/Quick_restart.png" ToolTip="Начать сначала"/>
+                    </Button>
+                    <Button x:Name="btnSaveGame" Margin="0, 0, 10, 0" IsEnabled="False" Click="btnSaveGame_Click">
+                        <Image Source="/Images/ToolBar/save.png" ToolTip="Сохранить результат"/>
+                    </Button>
+                    <Button x:Name="btnBack" Margin="0, 0, 10, 0">
+                        <Image Source="/Images/ToolBar/FastBack.png" ToolTip="Отменить"/>
+                    </Button>
+                    <Button x:Name="btnForward" Margin="0, 0, 10, 0">
+                        <Image Source="/Images/ToolBar/FastForward.gif" ToolTip="Восстановить"/>
+                    </Button>
+                </ToolBar>
+            </Grid>
+            <Grid x:Name="workSpaceGrid" Grid.Column="2" Grid.Row="1" VerticalAlignment="Center" Height="450">
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
