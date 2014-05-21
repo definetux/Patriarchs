@@ -3,7 +3,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:cardTemplate="clr-namespace:CardLib;assembly=CardLib"
-        Title="Патриархи" Height="680" Width="850" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Icon="logo.ico">
+        Title="Патриархи" Height="720" Width="850" WindowStartupLocation="CenterScreen" ResizeMode="CanResizeWithGrip" Icon="logo.ico">
     <Window.Background>
         <ImageBrush x:Name="WindowBrush"/>
     </Window.Background>
