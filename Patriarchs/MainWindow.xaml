@@ -62,7 +62,7 @@
                     <Button x:Name="btnBack" Margin="0, 0, 10, 0" Click="btnBack_Click">
                         <Image Source="/Images/ToolBar/FastBack.png" ToolTip="Отменить"/>
                     </Button>
-                    <Button x:Name="btnForward" Margin="0, 0, 10, 0">
+                    <Button x:Name="btnForward" Margin="0, 0, 10, 0" Click="btnForward_Click">
                         <Image Source="/Images/ToolBar/FastForward.gif" ToolTip="Восстановить"/>
                     </Button>
                 </ToolBar>

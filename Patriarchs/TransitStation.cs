@@ -40,7 +40,7 @@ namespace Patriarchs
             set;
         }
 
-        public string Time
+        public DateTime Time
         {
             get;
             set;
@@ -53,6 +53,12 @@ namespace Patriarchs
         }
 
         public IDeck NewDeck
+        {
+            get;
+            set;
+        }
+
+        public int FullDecks
         {
             get;
             set;

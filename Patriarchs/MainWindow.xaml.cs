@@ -53,6 +53,12 @@ namespace Patriarchs
 
         public MainWindow( )
         {
+
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer( );
+            dispatcherTimer.Tick += new EventHandler( dispatcherTimer_Tick );
+            dispatcherTimer.Interval = new TimeSpan( 0, 0, 1 );
+            dispatcherTimer.Start( );
+
             InitializeComponent( );
             InitGame( );
         }
@@ -126,14 +132,15 @@ namespace Patriarchs
         private void CardCtrl_MouseDown( object sender, MouseButtonEventArgs e )
         {
             CardLib.CardCtrl card = sender as CardLib.CardCtrl;
-            SetCurrentCard( card );
-            if( e.ChangedButton == MouseButton.Left && e.ClickCount == 2 )
+            
+            if( e.ChangedButton == MouseButton.Left && e.ClickCount == 2 && isDoubleClick == false )
             {
+                SetCurrentCard( card );
                 isDoubleClick = true;
                 card.OnDropCard( card, new CardLib.EventCardArgs( currentCard.Number, currentCard.Suit ) );
                 return;
             }
-
+            SetCurrentCard( card );
             var element = sender as FrameworkElement;
             m_anchorPoint = e.GetPosition( null );
             element.CaptureMouse( );
@@ -268,18 +275,17 @@ namespace Patriarchs
                 currentDeck.RemoveCard( currentCard );
             }
 
-            if( !( currentDeck is ToUpperDeck ) && !( currentDeck is ToLowerDeck ) )
-                IncreaseScores( );
-
             deck.SetCard( currentCard );
-            transitList[ currentStep - 1 ].NewDeck = deck;
-
             
         }
 
         private void AddToUpper( int row, Grid parent, CardLib.CardCtrl card )
         {
-            SetCurrentCard( upperDecks[ row ] );          
+            SetCurrentCard( upperDecks[ row ] );
+            AddToTransitList( currentCard, currentDeck );
+            transitList[ currentStep - 1 ].NewDeck = upperDecks[ row ];
+
+            IncreaseScores( );
             parent.Children.Remove( card );
             acesDeckPanel.Children.Add( card );
 
@@ -297,6 +303,10 @@ namespace Patriarchs
         private void AddToLower( int row, Grid parent, CardLib.CardCtrl card )
         {
             SetCurrentCard( lowerDecks[ row ] );
+            AddToTransitList( currentCard, currentDeck );
+            transitList[ currentStep - 1 ].NewDeck = lowerDecks[ row ];
+
+            IncreaseScores( );
             parent.Children.Remove( card );
             kingsDeckPanel.Children.Add( card );
 
@@ -359,8 +369,6 @@ namespace Patriarchs
             var card = sender as CardLib.CardCtrl;
             var cardParent = card.Parent as Grid;
 
-            AddToTransitList( currentCard, currentDeck );
-
             switch( e.Suit )
             {
                 case "Hearts":
@@ -400,7 +408,8 @@ namespace Patriarchs
                 GridLocation = ( Grid )card.CardControl.Parent,
                 GridRow = Grid.GetRow( card.CardControl ),
                 Score = Scores,
-                Time = Time
+                Time = currentTime,
+                FullDecks = fullDecks
             } );
             currentStep++;
         }
@@ -485,6 +494,7 @@ namespace Patriarchs
             card.CardControl.DropCard += CardCtrl_DropCard;
 
             freeCards.SetCard(card, number);
+            //transitList[ currentStep - 1 ].NewDeck = freeCards;
         }
 
         void CardControl_MouseClick( object sender, CardLib.EventCardArgs e )
@@ -621,13 +631,17 @@ namespace Patriarchs
                 return;
 
             var oldStation = transitList[ currentStep - 1 ];
-            currentTime = DateTime.Parse( oldStation.Time );
+            currentTime = oldStation.Time;
             Scores = oldStation.Score;
+            FullDeck = oldStation.FullDecks;
             if( oldStation.Deck is FreeDeck )
                 oldStation.Deck.SetCard( oldStation.Card, oldStation.GridLocation.RowDefinitions.Count * oldStation.GridRow + oldStation.GridColumn );
             else
                 oldStation.Deck.SetCard( oldStation.Card, oldStation.Deck.GetLastAdded() );
-            oldStation.NewDeck.RemoveCard( oldStation.Card );
+            if( oldStation.NewDeck != null )
+                oldStation.NewDeck.RemoveCard( oldStation.Card );
+            else
+                MessageBox.Show( "test" );
 
             var oldGrid = oldStation.GridLocation;
             var newGrid = oldStation.Card.CardControl.Parent as Grid;
@@ -658,7 +672,7 @@ namespace Patriarchs
             }
 
             currentStep--;
-            transitList.RemoveAt( currentStep );
+           // transitList.RemoveAt( currentStep );
         }
 
         private void InitGame( )
@@ -719,10 +733,6 @@ namespace Patriarchs
             fullDecks = 0;
             isDoubleClick = false;
             currentTime = new DateTime( );
-            dispatcherTimer = new System.Windows.Threading.DispatcherTimer( );
-            dispatcherTimer.Tick += new EventHandler( dispatcherTimer_Tick );
-            dispatcherTimer.Interval = new TimeSpan( 0, 0, 1 );
-            dispatcherTimer.Start( );
 
             transitList = new List<TransitStation>( );
             currentStep = 0;
@@ -768,6 +778,60 @@ namespace Patriarchs
         private void mnuRestart_Click( object sender, RoutedEventArgs e )
         {
             RestartGame( );
+        }
+
+        private void btnForward_Click( object sender, RoutedEventArgs e )
+        {
+            GoNext( );
+        }
+
+        private void GoNext( )
+        {
+            if( currentStep < transitList.Count )
+                currentStep++;
+            else
+                return;
+
+            var oldStation = transitList[ currentStep - 1 ];
+            currentTime = oldStation.Time;
+            Scores = oldStation.Score;
+            FullDeck = oldStation.FullDecks;
+            if( oldStation.Deck is FreeDeck )
+                oldStation.Deck.SetCard( oldStation.Card, oldStation.GridLocation.RowDefinitions.Count * oldStation.GridRow + oldStation.GridColumn );
+            else
+                oldStation.Deck.SetCard( oldStation.Card, oldStation.Deck.GetLastAdded( ) );
+            if( oldStation.NewDeck != null )
+                oldStation.NewDeck.RemoveCard( oldStation.Card );
+            else
+                MessageBox.Show( "test" );
+
+            var oldGrid = oldStation.GridLocation;
+            var newGrid = oldStation.Card.CardControl.Parent as Grid;
+
+            newGrid.Children.Remove( oldStation.Card.CardControl );
+
+            oldGrid.Children.Add( oldStation.Card.CardControl );
+            Grid.SetColumn( oldStation.Card.CardControl, oldStation.GridColumn );
+            Grid.SetRow( oldStation.Card.CardControl, oldStation.GridRow );
+
+            if( oldStation.Deck is BaseDeck )
+            {
+                oldStation.Card.CardControl.MouseDown -= CardCtrl_MouseDown;
+                oldStation.Card.CardControl.MouseMove -= CardCtrl_MouseMove;
+                oldStation.Card.CardControl.MouseUp -= CardCtrl_MouseUp;
+                oldStation.Card.CardControl.DropCard -= CardCtrl_DropCard;
+
+                oldStation.Card.CardControl.MouseUp += untouchedCard_MouseUp;
+            }
+            else
+            {
+                oldStation.Card.CardControl.MouseUp -= untouchedCard_MouseUp;
+
+                oldStation.Card.CardControl.MouseDown += CardCtrl_MouseDown;
+                oldStation.Card.CardControl.MouseMove += CardCtrl_MouseMove;
+                oldStation.Card.CardControl.MouseUp += CardCtrl_MouseUp;
+                oldStation.Card.CardControl.DropCard += CardCtrl_DropCard;
+            }
         }
     }
 }
