@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Patriarchs.Model
 {
-    class GivingDeck: IWorkDeck, IDeck
+    class GivingDeck: IDeck
     {
         private List<Card> listOfCards;
 
@@ -42,6 +42,11 @@ namespace Patriarchs.Model
         {
             if( listOfCards.Count != 0 )
                 listOfCards.Remove( card );
+        }
+
+        public int GetLastAdded( )
+        {
+            return GetDeckSize( ) - 1;
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Patriarchs.Model
 {
-    class FreeDeck: IDeck, IWorkDeck
+    class FreeDeck: IDeck
     {
         const int FREE_CARDS_COUNT = 9;
 

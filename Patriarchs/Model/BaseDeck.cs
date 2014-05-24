@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Patriarchs.Model
 {
-    class BaseDeck: IDeck, IWorkDeck
+    class BaseDeck: IDeck
     {
         private List<Card> listOfCard;
         private string shirts;
@@ -96,10 +96,17 @@ namespace Patriarchs.Model
                 return null;
         }
 
-        public void SetCard( Card card, int number = 0 )
+        public void SetCard( Card card, int number = -1 )
         {
+            if( number != -1 )
+            {
+                listOfCard[ number ] = card;
+            }
+            else
+            { 
+                listOfCard.Add( card );
+            }
             card.SetPathToImage( Properties.Resources.FullPathToShirts + shirts );
-            listOfCard.Add( card );
         }
 
 
@@ -140,6 +147,12 @@ namespace Patriarchs.Model
             {
                 item.SetPathToImage(Properties.Resources.FullPathToShirts + shirts);
             }
+        }
+
+
+        public int GetLastAdded( )
+        {
+            return GetDeckSize( ) - 1;
         }
     }
 }

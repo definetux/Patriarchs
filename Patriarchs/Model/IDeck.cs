@@ -10,8 +10,13 @@ namespace Patriarchs.Model
     {
         Card GetFirstCard( bool isRemove, int number );
 
+        int GetLastAdded( );
+
         int GetDeckSize( );
 
         void RemoveCard( Card card );
+
+        void SetCard( Card card, int number );
+
     }
 }

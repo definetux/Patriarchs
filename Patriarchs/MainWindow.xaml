@@ -59,7 +59,7 @@
                     <Button x:Name="btnSaveGame" Margin="0, 0, 10, 0" IsEnabled="False" Click="btnSaveGame_Click">
                         <Image Source="/Images/ToolBar/save.png" ToolTip="Сохранить результат"/>
                     </Button>
-                    <Button x:Name="btnBack" Margin="0, 0, 10, 0">
+                    <Button x:Name="btnBack" Margin="0, 0, 10, 0" Click="btnBack_Click">
                         <Image Source="/Images/ToolBar/FastBack.png" ToolTip="Отменить"/>
                     </Button>
                     <Button x:Name="btnForward" Margin="0, 0, 10, 0">

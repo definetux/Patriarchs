@@ -13,7 +13,7 @@ namespace Patriarchs.Model
         CLUBS,
         SPADES
     }
-    abstract class WorkDeck: IDeck, IWorkDeck
+    abstract class WorkDeck: IDeck
     {
         public static string[] Suits = { "Hearts", "Diamonds", "Clubs", "Spades" };
 
@@ -50,6 +50,11 @@ namespace Patriarchs.Model
         {
             if( listOfCards.Count != 0 )
                 listOfCards.Remove( card );
+        }
+
+        public int GetLastAdded( )
+        {
+            return GetDeckSize( ) - 1;
         }
     }
 }

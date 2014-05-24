@@ -74,6 +74,7 @@
     <Compile Include="ShirtsWindow.xaml.cs">
       <DependentUpon>ShirtsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TransitStation.cs" />
     <Compile Include="WelcomeWindow.xaml.cs">
       <DependentUpon>WelcomeWindow.xaml</DependentUpon>
     </Compile>
@@ -131,7 +132,6 @@
     <Compile Include="Model\FreeDeck.cs" />
     <Compile Include="Model\GivingDeck.cs" />
     <Compile Include="Model\IDeck.cs" />
-    <Compile Include="Model\IWorkDeck.cs" />
     <Compile Include="Model\ToLowerDeck.cs" />
     <Compile Include="Model\ToUpperDeck.cs" />
     <Compile Include="Model\WorkDeck.cs" />
