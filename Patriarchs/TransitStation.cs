@@ -28,6 +28,24 @@ namespace Patriarchs
             set;
         }
 
+        public int NewGridRow
+        {
+            get;
+            set;
+        }
+
+        public int NewGridColumn
+        {
+            get;
+            set;
+        }
+
+        public Grid NewGridLocation
+        {
+            get;
+            set;
+        }
+
         public Card Card
         {
             get;

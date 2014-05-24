@@ -33,7 +33,7 @@
                         <MenuItem x:Name="mnuExit" Header="Выход" Click="mnuExit_Click"/>
                         </MenuItem>
                         <MenuItem Header="Игра">
-                            <MenuItem x:Name="mnuRestore" Header="Восстановить"/>
+                            <MenuItem x:Name="mnuRestore" Header="Восстановить" Click="mnuRestore_Click"/>
                             <MenuItem x:Name="mnuCancel" Header="Отменить" Click="mnuCancel_Click"/>
                         </MenuItem>
                         <MenuItem Header="Параметры">
