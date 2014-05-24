@@ -110,7 +110,7 @@ namespace Patriarchs
                 {
                     btnSaveGame.IsEnabled = true;
                     btnSaveGame.Background = Brushes.Aquamarine;
-                    if( fullDecks == FULL_DECK )
+                    if( fullDecks == WIN_COUNT )
                     {
                         SaveResult( );
                         WinningWindow winWnd = new WinningWindow( );
@@ -298,16 +298,17 @@ namespace Patriarchs
 
             deck.SetCard( currentCard );
 
-            if( deck.GetDeckSize( ) == FULL_DECK )
-                FullDeck++;
+            
         }
 
         private void AddToUpper( int row, Grid parent, CardLib.CardCtrl card )
         {
-            SetCurrentCard( upperDecks[ row ] );
+            SetCurrentCard( upperDecks[ row ] );          
             parent.Children.Remove( card );
             acesDeckPanel.Children.Add( card );
 
+            if( upperDecks[ row ].GetDeckSize( ) == FULL_DECK )
+                FullDeck++;
             Grid.SetRow( card, row );
             Grid.SetColumn( card, row );
         }
@@ -323,6 +324,9 @@ namespace Patriarchs
             parent.Children.Remove( card );
             kingsDeckPanel.Children.Add( card );
 
+
+            if( lowerDecks[ row ].GetDeckSize( ) == FULL_DECK )
+                FullDeck++;
             Grid.SetRow( card, row );
             Grid.SetColumn( card, row );
         }
