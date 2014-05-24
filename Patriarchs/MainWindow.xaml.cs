@@ -53,39 +53,8 @@ namespace Patriarchs
 
         public MainWindow( )
         {
-            scores = -150;
-            fullDecks = 0;
-            isDoubleClick = false;
-            currentTime = new DateTime( );
-            dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0,0,1);
-            dispatcherTimer.Start();
-
-            transitList = new List<TransitStation>( );
-            currentStep = 0;
-
-            MP3Player.MP3Player.OpenPlayer( Environment.CurrentDirectory + "\\Sounds\\card_flip2.mp3" );
-            MP3Player.MP3Player.SetVolume( 100 );
-
             InitializeComponent( );
-
-            string path = "pack://application:,,," + Properties.Resources.PathToTableImage + Properties.Settings.Default.Desk;
-            Uri imageUri = new Uri( path, UriKind.Absolute );
-            BitmapImage imageBitmap = new BitmapImage( imageUri );
-            Background = new ImageBrush( imageBitmap );
-
-            path = Properties.Settings.Default.PlayerImage;
-            if( path != String.Empty )
-                imgPhoto.Source = new BitmapImage( new Uri( path ) );
-            else
-                imgPhoto.Source = new BitmapImage( new Uri( Properties.Resources.PathToPlayerImage, UriKind.Relative ) );
-            tbName.Text = Properties.Settings.Default.PlayerName;
-
-            BuildBaseDeck( );
-            BuildFreeCards( );
-            BuildUpperDecks( );
-            BuildLowerDecks( );
+            InitGame( );
         }
 
         public int Scores
@@ -552,8 +521,9 @@ namespace Patriarchs
             card.CardControl.MouseUp += CardCtrl_MouseUp;
             card.CardControl.DropCard += CardCtrl_DropCard;
 
-            Grid.SetRow( card.CardControl, 1 );
+
             AddToTransitList( card, baseDeck );
+            Grid.SetRow( card.CardControl, 1 );
 
             givingDeck.SetCard( card );
             transitList[ currentStep - 1 ].NewDeck = givingDeck;
@@ -668,8 +638,136 @@ namespace Patriarchs
             Grid.SetColumn( oldStation.Card.CardControl, oldStation.GridColumn );
             Grid.SetRow( oldStation.Card.CardControl, oldStation.GridRow );
 
+            if( oldStation.Deck is BaseDeck )
+            {
+                oldStation.Card.CardControl.MouseDown -= CardCtrl_MouseDown;
+                oldStation.Card.CardControl.MouseMove -= CardCtrl_MouseMove;
+                oldStation.Card.CardControl.MouseUp -= CardCtrl_MouseUp;
+                oldStation.Card.CardControl.DropCard -= CardCtrl_DropCard;
+
+                oldStation.Card.CardControl.MouseUp += untouchedCard_MouseUp;
+            }
+            else
+            {
+                oldStation.Card.CardControl.MouseUp -= untouchedCard_MouseUp;
+
+                oldStation.Card.CardControl.MouseDown += CardCtrl_MouseDown;
+                oldStation.Card.CardControl.MouseMove += CardCtrl_MouseMove;
+                oldStation.Card.CardControl.MouseUp += CardCtrl_MouseUp;
+                oldStation.Card.CardControl.DropCard += CardCtrl_DropCard;
+            }
+
             currentStep--;
             transitList.RemoveAt( currentStep );
+        }
+
+        private void InitGame( )
+        {
+            ClearParams( );
+
+            MP3Player.MP3Player.OpenPlayer( Environment.CurrentDirectory + "\\Sounds\\card_flip2.mp3" );
+            MP3Player.MP3Player.SetVolume( 100 );
+
+            string path = "pack://application:,,," + Properties.Resources.PathToTableImage + Properties.Settings.Default.Desk;
+            Uri imageUri = new Uri( path, UriKind.Absolute );
+            BitmapImage imageBitmap = new BitmapImage( imageUri );
+            Background = new ImageBrush( imageBitmap );
+
+            path = Properties.Settings.Default.PlayerImage;
+            if( path != String.Empty )
+                imgPhoto.Source = new BitmapImage( new Uri( path ) );
+            else
+                imgPhoto.Source = new BitmapImage( new Uri( Properties.Resources.PathToPlayerImage, UriKind.Relative ) );
+            tbName.Text = Properties.Settings.Default.PlayerName;
+
+            BuildBaseDeck( );
+            BuildFreeCards( );
+            BuildUpperDecks( );
+            BuildLowerDecks( );
+        }
+
+        private void ClearTable( )
+        {
+            int deckSize = freeCards.GetDeckSize();
+            for( int i = 0; i < deckSize; i++ )
+                workSpaceGrid.Children.Remove( freeCards.GetFirstCard( true, 0 ).CardControl );
+
+            deckSize = baseDeck.GetDeckSize( );
+            for( int i = 0; i < deckSize; i++ )
+                untouchedDeckPanel.Children.Remove( baseDeck.GetFirstCard( true ).CardControl );
+
+            deckSize = givingDeck.GetDeckSize( );
+            for( int i = 0; i < deckSize; i++ )
+                untouchedDeckPanel.Children.Remove( givingDeck.GetFirstCard( true ).CardControl );
+
+            for( int i = 0; i < upperDecks.Count; i++ )
+            {
+                deckSize = upperDecks[i].GetDeckSize( );
+                for( int j = 0; j < deckSize; j++ )
+                    acesDeckPanel.Children.Remove( upperDecks[ i ].GetFirstCard( true ).CardControl );
+
+                deckSize = lowerDecks[i].GetDeckSize( );
+                for( int j = 0; j < deckSize; j++ )
+                    kingsDeckPanel.Children.Remove( lowerDecks[ i ].GetFirstCard( true ).CardControl );
+            }
+
+        }
+
+        private void ClearParams( )
+        {
+            Scores = -150;
+            fullDecks = 0;
+            isDoubleClick = false;
+            currentTime = new DateTime( );
+            dispatcherTimer = new System.Windows.Threading.DispatcherTimer( );
+            dispatcherTimer.Tick += new EventHandler( dispatcherTimer_Tick );
+            dispatcherTimer.Interval = new TimeSpan( 0, 0, 1 );
+            dispatcherTimer.Start( );
+
+            transitList = new List<TransitStation>( );
+            currentStep = 0;
+        }
+
+        private void btnNewGame_Click( object sender, RoutedEventArgs e )
+        {
+            SetNewGame( );
+        }
+
+        private void SetNewGame( )
+        {
+            ClearTable( );
+            ClearParams( );
+            InitGame( );
+        }
+
+        private void mnuNewGame_Click( object sender, RoutedEventArgs e )
+        {
+            SetNewGame( );
+        }
+
+        private void mnuCancel_Click( object sender, RoutedEventArgs e )
+        {
+            GoBack( );
+        }
+
+        private void btnRestartGame_Click( object sender, RoutedEventArgs e )
+        {
+            RestartGame( );
+        }
+
+        private void RestartGame( )
+        {
+            ClearTable( );
+            ClearParams( );
+            baseDeck.SetReserve( );
+            BuildFreeCards( );
+            BuildUpperDecks( );
+            BuildLowerDecks( );
+        }
+
+        private void mnuRestart_Click( object sender, RoutedEventArgs e )
+        {
+            RestartGame( );
         }
     }
 }

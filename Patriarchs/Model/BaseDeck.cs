@@ -9,12 +9,14 @@ namespace Patriarchs.Model
     class BaseDeck: IDeck
     {
         private List<Card> listOfCard;
+        private List<Card> reserveList;
         private string shirts;
         private Random rand;
 
         public BaseDeck( int count, string shirts )
         {
             listOfCard = new List<Card>( );
+            reserveList = new List<Card>( );
             this.shirts = shirts;
             string pathToImage = Properties.Resources.FullPathToShirts + shirts;
 
@@ -78,9 +80,22 @@ namespace Patriarchs.Model
                 }
 
                 listOfCard.Add( new Card( number, suit, pathToImage ) );
+                reserveList.Add( new Card( number, suit, pathToImage ) );
             }
 
             listOfCard.First( ).IsActive = true;
+        }
+
+        public void SetReserve( )
+        {
+            listOfCard.RemoveRange( 0, listOfCard.Count );
+
+            int size = reserveList.Count;
+
+            for( int i = 0; i < size; i++ )
+            {
+                listOfCard.Add( new Card( reserveList[ i ].Number, reserveList[ i ].Suit, reserveList[ i ].CardControl.ImgSource.ToString( ).Split(',')[3] ) );
+            }
         }
 
         public Card GetFirstCard( bool isRemove, int number = 0 )

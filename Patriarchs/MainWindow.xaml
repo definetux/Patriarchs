@@ -28,13 +28,13 @@
                 </Grid.RowDefinitions>
                     <Menu>
                         <MenuItem Header="Файл">
-                            <MenuItem x:Name="mnuNewGame" Header="Новая игра"/>
-                        <MenuItem x:Name="mnuRestart" Header="Начать сначала"/>
+                            <MenuItem x:Name="mnuNewGame" Header="Новая игра" Click="mnuNewGame_Click"/>
+                        <MenuItem x:Name="mnuRestart" Header="Начать сначала" Click="mnuRestart_Click"/>
                         <MenuItem x:Name="mnuExit" Header="Выход" Click="mnuExit_Click"/>
                         </MenuItem>
                         <MenuItem Header="Игра">
                             <MenuItem x:Name="mnuRestore" Header="Восстановить"/>
-                            <MenuItem x:Name="mnuCancel" Header="Отменить"/>
+                            <MenuItem x:Name="mnuCancel" Header="Отменить" Click="mnuCancel_Click"/>
                         </MenuItem>
                         <MenuItem Header="Параметры">
                             <MenuItem x:Name="mnuBackgroundColor" Header="Цвет фона" Click="mnuBackgroundColor_Click"/>
@@ -50,10 +50,10 @@
                             </MenuItem>
                     </Menu>
                 <ToolBar Grid.Row="1" IsHitTestVisible="True">
-                    <Button x:Name="btnNewGame" Margin="0, 0, 10, 0">
+                    <Button x:Name="btnNewGame" Margin="0, 0, 10, 0" Click="btnNewGame_Click">
                         <Image Source="/Images/ToolBar/New_game.png" ToolTip="Новая игра"/>
                     </Button>
-                    <Button x:Name="btnRestartGame" Margin="0, 0, 10, 0">
+                    <Button x:Name="btnRestartGame" Margin="0, 0, 10, 0" Click="btnRestartGame_Click">
                         <Image Source="/Images/ToolBar/Quick_restart.png" ToolTip="Начать сначала"/>
                     </Button>
                     <Button x:Name="btnSaveGame" Margin="0, 0, 10, 0" IsEnabled="False" Click="btnSaveGame_Click">
