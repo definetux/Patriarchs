@@ -838,14 +838,9 @@ namespace Patriarchs
             Grid.SetRow( newStation.Card.CardControl, newStation.NewGridRow );
 
 
-            if( newStation.Deck is BaseDeck )
+            if( newStation.NewDeck is BaseDeck )
             {
-                newStation.Card.SetPathToImage( Properties.Resources.PathToCards
-                                        + '/'
-                                        + newStation.Card.Suit
-                                        + '/'
-                                        + newStation.Card.Number.ToString( )
-                                        + ".png" );
+                
 
                 newStation.Card.CardControl.MouseDown -= CardCtrl_MouseDown;
                 newStation.Card.CardControl.MouseMove -= CardCtrl_MouseMove;
@@ -856,6 +851,13 @@ namespace Patriarchs
             }
             else
             {
+                newStation.Card.SetPathToImage(Properties.Resources.PathToCards
+                                        + '/'
+                                        + newStation.Card.Suit
+                                        + '/'
+                                        + newStation.Card.Number.ToString()
+                                        + ".png");
+
                 newStation.Card.CardControl.MouseUp -= untouchedCard_MouseUp;
 
                 newStation.Card.CardControl.MouseDown += CardCtrl_MouseDown;
