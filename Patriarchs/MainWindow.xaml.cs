@@ -48,6 +48,7 @@ namespace Patriarchs
         private int fullDecks;
         private List<TransitStation> transitList;
         private int currentStep;
+        private int countBaseDeck;
 
         private TranslateTransform currentTransform;
 
@@ -575,6 +576,11 @@ namespace Patriarchs
 
         private void Back_MouseUp( object sender, MouseButtonEventArgs e )
         {
+            countBaseDeck++;
+
+            if (countBaseDeck >= 2)
+                return;
+
             int count = givingDeck.GetDeckSize( );
 
             if( count == 0 )
@@ -769,6 +775,7 @@ namespace Patriarchs
         {
             Scores = -150;
             fullDecks = 0;
+            countBaseDeck = 0;
             isDoubleClick = false;
             currentTime = new DateTime( );
 
