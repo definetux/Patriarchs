@@ -102,7 +102,7 @@ namespace Patriarchs.Model
         {
             if( listOfCard.Count != 0 )
             {
-                Card firstCard = listOfCard.Last( );
+                Card firstCard = listOfCard.First( );
                 if( isRemove == true )
                     listOfCard.Remove( firstCard );
                 return firstCard;
@@ -115,7 +115,7 @@ namespace Patriarchs.Model
         {
             if( number != -1 )
             {
-                listOfCard[ number ] = card;
+                listOfCard.Insert(number, card);
             }
             else
             { 
@@ -123,7 +123,6 @@ namespace Patriarchs.Model
             }
             card.SetPathToImage( Properties.Resources.FullPathToShirts + shirts );
         }
-
 
         public int GetDeckSize( )
         {
@@ -167,7 +166,7 @@ namespace Patriarchs.Model
 
         public int GetLastAdded( )
         {
-            return GetDeckSize( ) - 1;
+            return GetDeckSize() - 1;
         }
     }
 }

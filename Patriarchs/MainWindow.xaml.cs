@@ -525,6 +525,8 @@ namespace Patriarchs
                 parent.Children.Remove( untouchedCard.CardControl );
 
             untouchedDeckPanel.Children.Add( untouchedCard.CardControl );
+            var par = untouchedCard.CardControl.Parent as Grid;
+
             Grid.SetRow( untouchedCard.CardControl, 0 );
         }
 
@@ -549,6 +551,11 @@ namespace Patriarchs
             transitList.RemoveRange( currentStep, diff );
 
             AddToTransitList( card, baseDeck );
+
+            var parent = card.CardControl.Parent as Grid;
+            parent.Children.Remove(card.CardControl);
+            parent.Children.Add(card.CardControl);
+
             Grid.SetRow( card.CardControl, 1 );
 
             givingDeck.SetCard( card );
@@ -835,13 +842,10 @@ namespace Patriarchs
 
             newGrid.Children.Add( newStation.Card.CardControl );
             Grid.SetColumn( newStation.Card.CardControl, newStation.NewGridColumn );
-            Grid.SetRow( newStation.Card.CardControl, newStation.NewGridRow );
-
+            Grid.SetRow(newStation.Card.CardControl, newStation.NewGridRow);
 
             if( newStation.NewDeck is BaseDeck )
             {
-                
-
                 newStation.Card.CardControl.MouseDown -= CardCtrl_MouseDown;
                 newStation.Card.CardControl.MouseMove -= CardCtrl_MouseMove;
                 newStation.Card.CardControl.MouseUp -= CardCtrl_MouseUp;
