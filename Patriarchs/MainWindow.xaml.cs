@@ -518,6 +518,7 @@ namespace Patriarchs
 
         private void SetFirstBaseCard( Card untouchedCard )
         {
+            untouchedCard.CardControl.MouseUp -= untouchedCard_MouseUp;
             untouchedCard.CardControl.MouseUp += untouchedCard_MouseUp;
 
             var parent = untouchedCard.CardControl.Parent as Grid;
@@ -691,12 +692,17 @@ namespace Patriarchs
                 oldStation.Card.CardControl.MouseUp -= CardCtrl_MouseUp;
                 oldStation.Card.CardControl.DropCard -= CardCtrl_DropCard;
 
+                oldStation.Card.CardControl.MouseUp -= untouchedCard_MouseUp;
                 oldStation.Card.CardControl.MouseUp += untouchedCard_MouseUp;
             }
             else
             {
                 oldStation.Card.CardControl.MouseUp -= untouchedCard_MouseUp;
 
+                oldStation.Card.CardControl.MouseDown -= CardCtrl_MouseDown;
+                oldStation.Card.CardControl.MouseMove -= CardCtrl_MouseMove;
+                oldStation.Card.CardControl.MouseUp -= CardCtrl_MouseUp;
+                oldStation.Card.CardControl.DropCard -= CardCtrl_DropCard;
                 oldStation.Card.CardControl.MouseDown += CardCtrl_MouseDown;
                 oldStation.Card.CardControl.MouseMove += CardCtrl_MouseMove;
                 oldStation.Card.CardControl.MouseUp += CardCtrl_MouseUp;
@@ -851,6 +857,7 @@ namespace Patriarchs
                 newStation.Card.CardControl.MouseUp -= CardCtrl_MouseUp;
                 newStation.Card.CardControl.DropCard -= CardCtrl_DropCard;
 
+                newStation.Card.CardControl.MouseUp -= untouchedCard_MouseUp;
                 newStation.Card.CardControl.MouseUp += untouchedCard_MouseUp;
             }
             else
@@ -864,6 +871,10 @@ namespace Patriarchs
 
                 newStation.Card.CardControl.MouseUp -= untouchedCard_MouseUp;
 
+                newStation.Card.CardControl.MouseDown -= CardCtrl_MouseDown;
+                newStation.Card.CardControl.MouseMove -= CardCtrl_MouseMove;
+                newStation.Card.CardControl.MouseUp -= CardCtrl_MouseUp;
+                newStation.Card.CardControl.DropCard -= CardCtrl_DropCard;
                 newStation.Card.CardControl.MouseDown += CardCtrl_MouseDown;
                 newStation.Card.CardControl.MouseMove += CardCtrl_MouseMove;
                 newStation.Card.CardControl.MouseUp += CardCtrl_MouseUp;

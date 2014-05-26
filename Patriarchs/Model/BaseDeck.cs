@@ -166,7 +166,7 @@ namespace Patriarchs.Model
 
         public int GetLastAdded( )
         {
-            return GetDeckSize() - 1;
+            return 0;
         }
     }
 }
