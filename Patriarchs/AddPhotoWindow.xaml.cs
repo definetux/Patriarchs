@@ -20,6 +20,9 @@ namespace Patriarchs
     /// </summary>
     public partial class AddPhotoWindow : Window
     {
+        /// <summary>
+        /// Инициализация окна
+        /// </summary>
         public AddPhotoWindow( )
         {
             InitializeComponent( );

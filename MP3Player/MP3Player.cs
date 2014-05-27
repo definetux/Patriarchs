@@ -21,6 +21,11 @@ namespace MP3Player
         [DllImport( "winmm.dll" )]
         private static extern int waveOutSetVolume( IntPtr hwo, uint dwVolume );
 
+        /// <summary>
+        /// Открытие песни для записи
+        /// </summary>
+        /// <param name="sFileName"> Путь к аудио </param>
+        /// <returns></returns>
         public static bool OpenPlayer( string sFileName )
         {
             string _command = "open \"" + sFileName + "\" type mpegvideo alias MediaFile";
@@ -35,6 +40,10 @@ namespace MP3Player
                 return true;
         }
 
+        /// <summary>
+        /// Получить громкость
+        /// </summary>
+        /// <returns></returns>
         public static int GetVolume( )
         {
             uint CurrVol = 0;
@@ -46,6 +55,10 @@ namespace MP3Player
             return CalcVol / ( ushort.MaxValue / 100 );
         }
 
+        /// <summary>
+        /// Установить громкость
+        /// </summary>
+        /// <param name="value"></param>
         public static void SetVolume( int value )
         {
             int NewVolume = ( ( ushort.MaxValue / 100 ) * value );
@@ -55,6 +68,11 @@ namespace MP3Player
             waveOutSetVolume( IntPtr.Zero, NewVolumeAllChannels );
         }
 
+        /// <summary>
+        /// Проиграть музыку
+        /// </summary>
+        /// <param name="handle"> Указатеь на файл </param>
+        /// <returns> Результат проигрывания </returns>
         public static bool Play( IntPtr handle )
         {
             string _command = "play MediaFile notify";
@@ -69,6 +87,10 @@ namespace MP3Player
                 return true;
         }
 
+        /// <summary>
+        /// Восстановить проигрывание
+        /// </summary>
+        /// <returns> Результат восстановления </returns>
         public static bool Resume( )
         {
             string _command = "resume MediaFile";
@@ -83,6 +105,10 @@ namespace MP3Player
                 return true;
         }
 
+        /// <summary>
+        /// Поставить проигрывание на паузу
+        /// </summary>
+        /// <returns> Результат паузы </returns>
         public static bool PausePlayer( )
         {
             string _command = "pause MediaFile";
@@ -97,6 +123,10 @@ namespace MP3Player
                 return true;
         }
 
+        /// <summary>
+        /// Закрыть плеер
+        /// </summary>
+        /// <returns> Результат закрытия </returns>
         public static bool ClosePlayer( )
         {
             string _command = "close MediaFile";
@@ -112,6 +142,10 @@ namespace MP3Player
                 return true;
         }
 
+        /// <summary>
+        /// Остановить проигрывание
+        /// </summary>
+        /// <returns> Результат остановки </returns>
         public static bool StopPlayer( )
         {
             string _command = "stop MediaFile";

@@ -30,6 +30,7 @@ namespace Patriarchs
         const int CARDS_COUNT = 96;
         const int FULL_DECK = 13;
         const int WIN_COUNT = 8;
+        const int SCORE_UP = 20;
 
         private Point m_anchorPoint;
         private Point m_currentPoint;
@@ -52,6 +53,9 @@ namespace Patriarchs
 
         private TranslateTransform currentTransform;
 
+        /// <summary>
+        /// Инициализация окна
+        /// </summary>
         public MainWindow( )
         {
 
@@ -64,6 +68,9 @@ namespace Patriarchs
             InitGame( );
         }
 
+        /// <summary>
+        /// Очки
+        /// </summary>
         public int Scores
         {
             get
@@ -77,6 +84,9 @@ namespace Patriarchs
             }
         }
 
+        /// <summary>
+        /// Количество заполненных результирующих колод
+        /// </summary>
         public int FullDeck
         {
             get
@@ -105,6 +115,9 @@ namespace Patriarchs
             }
         }
 
+        /// <summary>
+        /// Текущее время
+        /// </summary>
         public string Time
         {
             get;
@@ -118,7 +131,15 @@ namespace Patriarchs
             OnPropertyChanged( "Time" );
         }   
 
+        /// <summary>
+        /// Событие изменения свойств
+        /// </summary>
         public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Обработчик события изменения свойств
+        /// </summary>
+        /// <param name="info"></param>
         public void OnPropertyChanged( string info )
         {
             if( PropertyChanged != null )
@@ -130,6 +151,11 @@ namespace Patriarchs
             this.Close( );
         }
 
+        /// <summary>
+        /// Нажатие мыши на карту
+        /// </summary>
+        /// <param name="sender"> Объект </param>
+        /// <param name="e"> Аргументы </param>
         private void CardCtrl_MouseDown( object sender, MouseButtonEventArgs e )
         {
             CardLib.CardCtrl card = sender as CardLib.CardCtrl;
@@ -154,6 +180,11 @@ namespace Patriarchs
 
         }
 
+        /// <summary>
+        /// Движение мыши на карте
+        /// </summary>
+        /// <param name="sender"> Объект </param>
+        /// <param name="e"> Аргументы </param>
         private void CardCtrl_MouseMove( object sender, MouseEventArgs e )
         {
             if( isDrag )
@@ -170,6 +201,11 @@ namespace Patriarchs
             }
         }
 
+        /// <summary>
+        /// Отжатие мыши на карте
+        /// </summary>
+        /// <param name="sender"> Объект </param>
+        /// <param name="e"> Аргументы </param>
         private void CardCtrl_MouseUp( object sender, MouseButtonEventArgs e )
         {
             if( isDrag )
@@ -201,6 +237,10 @@ namespace Patriarchs
             MessageBox.Show( e.Number + e.Suit );
         }
 
+        /// <summary>
+        /// Установить текущую карту и колоду
+        /// </summary>
+        /// <param name="card"></param>
         private void SetCurrentCard( CardLib.CardCtrl card )
         {
             var parent = card.Parent as Grid;
@@ -238,6 +278,11 @@ namespace Patriarchs
             }
         }
 
+        /// <summary>
+        /// Проверить колоду от Короля до Туза
+        /// </summary>
+        /// <param name="row"> Номер строки </param>
+        /// <returns> Истина, если карта попала в нужную колоду </returns>
         private bool CheckLowerDeck( int row )
         {
             var c = lowerDecks[ row ].GetFirstCard( false );
@@ -245,17 +290,32 @@ namespace Patriarchs
 
         }
 
+        /// <summary>
+        /// Проверить колоду от Туза до Короля
+        /// </summary>
+        /// <param name="row"> Номер строки </param>
+        /// <returns> Истина, если карта попала в нужную колоду </returns>
         private bool CheckUpperDeck( int row )
         {
             var c = upperDecks[ row ].GetFirstCard( false );
             return CheckPosition( c.CardControl ) && ( CheckCardNumber( c ) == 1 ) ;
         }
 
+        /// <summary>
+        /// Проверить номинал брошенной карты
+        /// </summary>
+        /// <param name="card"> Карта </param>
+        /// <returns> |1|, если номинал карты соответствует колоде </returns>
         private int CheckCardNumber( Card card )
         {
             return currentCard.Number - card.Number;
         }
 
+        /// <summary>
+        /// Проверка положения мыши над картой
+        /// </summary>
+        /// <param name="element"> Карта </param>
+        /// <returns> Истина, если мышь находится над картой </returns>
         private bool CheckPosition( IInputElement element )
         {
             if( isDoubleClick == true )
@@ -269,6 +329,10 @@ namespace Patriarchs
                 return false;
         }
 
+        /// <summary>
+        /// Установить текущую карту
+        /// </summary>
+        /// <param name="deck"> Колода </param>
         private void SetCurrentCard( WorkDeck deck )
         {
             if( currentDeck != null )
@@ -280,6 +344,12 @@ namespace Patriarchs
             
         }
 
+        /// <summary>
+        /// Добавить карту в колоду от Туза до Короля
+        /// </summary>
+        /// <param name="row"> Номер строки таблицы </param>
+        /// <param name="parent"> Родительская таблица </param>
+        /// <param name="card"> Представление карты </param>
         private void AddToUpper( int row, Grid parent, CardLib.CardCtrl card )
         {
             SetCurrentCard( upperDecks[ row ] );
@@ -302,11 +372,20 @@ namespace Patriarchs
             transitList[ currentStep - 1 ].NewGridColumn = row;
         }
 
+        /// <summary>
+        /// Увеличение очков
+        /// </summary>
         private void IncreaseScores( )
         {
-            Scores += 20;
+            Scores += SCORE_UP;
         }
 
+        /// <summary>
+        /// Добавить карту в колоду от Короля до Туза
+        /// </summary>
+        /// <param name="row"> Номер строки таблицы </param>
+        /// <param name="parent"> Родительская таблица </param>
+        /// <param name="card"> Представление карты </param>
         private void AddToLower( int row, Grid parent, CardLib.CardCtrl card )
         {
             SetCurrentCard( lowerDecks[ row ] );
@@ -330,6 +409,12 @@ namespace Patriarchs
             transitList[ currentStep - 1 ].NewGridColumn = row;
         }
 
+        /// <summary>
+        /// Добавить карту в результирующую колоду
+        /// </summary>
+        /// <param name="row"> Номер строки таблицы </param>
+        /// <param name="parent"> Родительская таблица </param>
+        /// <param name="card"> Представление карты </param>
         private void AddToResultDeck( int row, Grid parent, CardLib.CardCtrl card )
         {
             if( CheckUpperDeck( row ) )
@@ -343,6 +428,9 @@ namespace Patriarchs
                 }
         }
 
+        /// <summary>
+        /// Обновить колоду свободных карт
+        /// </summary>
         private void UpdateFreeDeck( )
         {
             if( freeCards.CheckSize( ) == false )
@@ -385,6 +473,11 @@ namespace Patriarchs
             }
         }
 
+        /// <summary>
+        /// Обработчка события сброса карты
+        /// </summary>
+        /// <param name="sender"> Объект </param>
+        /// <param name="e"> Аргументы </param>
         private void CardCtrl_DropCard( object sender, CardLib.EventCardArgs e )
         {
             var card = sender as CardLib.CardCtrl;
@@ -419,6 +512,11 @@ namespace Patriarchs
             isDoubleClick = false;
         }
 
+        /// <summary>
+        /// Добавить карту в список ходов
+        /// </summary>
+        /// <param name="card"> Карта </param>
+        /// <param name="cardDeck"> Колода карты </param>
         private void AddToTransitList( Card card, IDeck cardDeck )
         {
             transitList.Add( new TransitStation
@@ -435,6 +533,9 @@ namespace Patriarchs
             currentStep++;
         }
 
+        /// <summary>
+        /// Построить базовую колоду
+        /// </summary>
         private void BuildBaseDeck( )
         {
             try
@@ -450,6 +551,9 @@ namespace Patriarchs
             SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
         }
 
+        /// <summary>
+        /// Построить колоды от Туза до Короля
+        /// </summary>
         private void BuildUpperDecks( )
         {
             upperDecks = new List<ToUpperDeck>( );
@@ -463,6 +567,9 @@ namespace Patriarchs
             }
         }
 
+        /// <summary>
+        /// Построить колоды от Короля до Туза
+        /// </summary>
         private void BuildLowerDecks( )
         {
             lowerDecks = new List<ToLowerDeck>( );
@@ -476,6 +583,9 @@ namespace Patriarchs
             }
         }
 
+        /// <summary>
+        /// Построить колоду свободных карт
+        /// </summary>
         private void BuildFreeCards( )
         {
             freeCards = new FreeDeck( );
@@ -498,6 +608,11 @@ namespace Patriarchs
             SetFirstBaseCard( baseDeck.GetFirstCard( false ) );
         }
 
+        /// <summary>
+        /// Добавить карту в колоду свободных карт
+        /// </summary>
+        /// <param name="card"> Карта </param>
+        /// <param name="number"> Номер карты в колоде </param>
         private void AddToFree( Card card, int number = -1 )
         {
             card.SetPathToImage(Properties.Resources.PathToCards
@@ -517,6 +632,10 @@ namespace Patriarchs
             freeCards.SetCard(card, number);
         }
 
+        /// <summary>
+        /// Установить первую карту в базовой колоде активной
+        /// </summary>
+        /// <param name="untouchedCard"> Карта </param>
         private void SetFirstBaseCard( Card untouchedCard )
         {
             untouchedCard.CardControl.MouseUp -= untouchedCard_MouseUp;
@@ -532,6 +651,11 @@ namespace Patriarchs
             Grid.SetRow( untouchedCard.CardControl, 0 );
         }
 
+        /// <summary>
+        /// Отжатие мыши над картой базовой колоды
+        /// </summary>
+        /// <param name="sender"> Объект </param>
+        /// <param name="e"> Аргументы </param>
         void untouchedCard_MouseUp( object sender, MouseButtonEventArgs e )
         {
             var card = baseDeck.GetFirstCard( true );
@@ -574,6 +698,11 @@ namespace Patriarchs
             }
         }
 
+        /// <summary>
+        /// Отжатие мыши над элементом восстановления базовой колоды
+        /// </summary>
+        /// <param name="sender"> Объект </param>
+        /// <param name="e"> Аргументы </param>
         private void Back_MouseUp( object sender, MouseButtonEventArgs e )
         {
             countBaseDeck++;
@@ -636,6 +765,9 @@ namespace Patriarchs
             Background = new ImageBrush( imageBitmap );
         }
 
+        /// <summary>
+        /// Сохранить результат в таблицу рекордов
+        /// </summary>
         private void SaveResult( )
         {
             StreamWriter sw =  File.AppendText( "scores.txt" );
@@ -664,6 +796,9 @@ namespace Patriarchs
             GoBack( );
         }
 
+        /// <summary>
+        /// Перейти к предыдущему ходу
+        /// </summary>
         private void GoBack( )
         {
             if( currentStep == 0 )
@@ -719,6 +854,9 @@ namespace Patriarchs
            // transitList.RemoveAt( currentStep );
         }
 
+        /// <summary>
+        /// Инициализация игры
+        /// </summary>
         private void InitGame( )
         {
             ClearParams( );
@@ -744,6 +882,9 @@ namespace Patriarchs
             BuildLowerDecks( );
         }
 
+        /// <summary>
+        /// Очистка стола от карт
+        /// </summary>
         private void ClearTable( )
         {
             int deckSize = freeCards.GetDeckSize();
@@ -771,6 +912,9 @@ namespace Patriarchs
 
         }
 
+        /// <summary>
+        /// Очистка параметров игры
+        /// </summary>
         private void ClearParams( )
         {
             Scores = -150;
@@ -788,6 +932,9 @@ namespace Patriarchs
             SetNewGame( );
         }
 
+        /// <summary>
+        /// Установить новую игру
+        /// </summary>
         private void SetNewGame( )
         {
             ClearTable( );
@@ -810,6 +957,9 @@ namespace Patriarchs
             RestartGame( );
         }
 
+        /// <summary>
+        /// Восстановить игру сначала
+        /// </summary>
         private void RestartGame( )
         {
             ClearTable( );
@@ -830,6 +980,9 @@ namespace Patriarchs
             GoNext( );
         }
 
+        /// <summary>
+        /// Перейти к следующему ходу
+        /// </summary>
         private void GoNext( )
         {
             if( currentStep >= transitList.Count )

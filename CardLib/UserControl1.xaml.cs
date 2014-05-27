@@ -20,14 +20,27 @@ namespace CardLib
     /// </summary>
     public partial class CardCtrl : UserControl
     {
+        /// <summary>
+        /// Событие сброса карты
+        /// </summary>
         public event EventHandler<EventCardArgs> CardDropped;
+
+        /// <summary>
+        /// Событие, карта брошена
+        /// </summary>
         public event EventHandler<EventCardArgs> DropCard;
 
+        /// <summary>
+        /// Инициализация карты
+        /// </summary>
         public CardCtrl()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Путь к изображению
+        /// </summary>
         public ImageSource ImgSource
         {
             get
@@ -41,6 +54,11 @@ namespace CardLib
             }
         }
 
+        /// <summary>
+        /// Обработчик сброса карты
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OnCardDroped( object sender, EventCardArgs e )
         {
             EventHandler<EventCardArgs> handler = CardDropped;
@@ -50,6 +68,11 @@ namespace CardLib
             }
         }
 
+        /// <summary>
+        /// Обработчик события, карта брошена
+        /// </summary>
+        /// <param name="sender"> Объект </param>
+        /// <param name="e"> Параметры объекта </param>
         public void OnDropCard( object sender, EventCardArgs e )
         {
             EventHandler<EventCardArgs> handler = DropCard;

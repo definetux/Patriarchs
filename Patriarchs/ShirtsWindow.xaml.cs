@@ -19,6 +19,9 @@ namespace Patriarchs
     /// </summary>
     public partial class ShirtsWindow : Window
     {
+        /// <summary>
+        /// Инициализация окна
+        /// </summary>
         public ShirtsWindow()
         {
             InitializeComponent();

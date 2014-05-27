@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Patriarchs.Model
 {
+    /// <summary>
+    /// Базовая колода
+    /// </summary>
     class BaseDeck: IDeck
     {
         private List<Card> listOfCard;
@@ -13,6 +16,11 @@ namespace Patriarchs.Model
         private string shirts;
         private Random rand;
 
+        /// <summary>
+        /// Инициализация колоды
+        /// </summary>
+        /// <param name="count"> Количество карт </param>
+        /// <param name="shirts"> Путь к изображению рубашки карты</param>
         public BaseDeck( int count, string shirts )
         {
             listOfCard = new List<Card>( );
@@ -86,6 +94,9 @@ namespace Patriarchs.Model
             listOfCard.First( ).IsActive = true;
         }
 
+        /// <summary>
+        /// Установить резервную колоду
+        /// </summary>
         public void SetReserve( )
         {
             listOfCard.RemoveRange( 0, listOfCard.Count );
@@ -98,6 +109,12 @@ namespace Patriarchs.Model
             }
         }
 
+        /// <summary>
+        /// Получить первую карту колоды
+        /// </summary>
+        /// <param name="isRemove"> Флаг удаление карты из колоды </param>
+        /// <param name="number"> Номер карты в колоде </param>
+        /// <returns> Первая карта </returns>
         public Card GetFirstCard( bool isRemove, int number = 0 )
         {
             if( listOfCard.Count != 0 )
@@ -111,6 +128,11 @@ namespace Patriarchs.Model
                 return null;
         }
 
+        /// <summary>
+        /// Добавить карту в колоду 
+        /// </summary>
+        /// <param name="card"> Карта </param>
+        /// <param name="number"> Номер в колоде </param>
         public void SetCard( Card card, int number = -1 )
         {
             if( number != -1 )
@@ -124,18 +146,31 @@ namespace Patriarchs.Model
             card.SetPathToImage( Properties.Resources.FullPathToShirts + shirts );
         }
 
+        /// <summary>
+        /// Вернуть размер колоды
+        /// </summary>
+        /// <returns> Размер колоды </returns>
         public int GetDeckSize( )
         {
             return listOfCard.Count;
         }
 
-
+        /// <summary>
+        /// Удалить карту из колоды
+        /// </summary>
+        /// <param name="card"> Карта </param>
         public void RemoveCard( Card card )
         {
             if( listOfCard.Count != 0 )
                 listOfCard.Remove( card );
         }
 
+        /// <summary>
+        /// Генерация колоды
+        /// </summary>
+        /// <param name="start"> Стартовый номер карты </param>
+        /// <param name="finish"> Финишный номер карты </param>
+        /// <returns> Список карт </returns>
         private List<int> GenerateDeck( int start, int finish )
         {
             List<int> startSeq = new List<int>();
@@ -154,6 +189,9 @@ namespace Patriarchs.Model
             return resultSeq;
         }
 
+        /// <summary>
+        /// Изменить рубашку колоды
+        /// </summary>
         public void ChangeShirt()
         {
             shirts = Properties.Settings.Default.Shirt;
@@ -163,7 +201,10 @@ namespace Patriarchs.Model
             }
         }
 
-
+        /// <summary>
+        /// Вернуть номер последней добавленной карты
+        /// </summary>
+        /// <returns> Номер карты </returns>
         public int GetLastAdded( )
         {
             return 0;

@@ -7,6 +7,9 @@ using System.Windows.Media.Imaging;
 
 namespace Patriarchs.Model
 {
+    /// <summary>
+    /// Карта
+    /// </summary>
     public class Card
     {
         private int number;
@@ -14,6 +17,12 @@ namespace Patriarchs.Model
         private CardLib.CardCtrl control;
         private bool isActive;
 
+        /// <summary>
+        /// Инициализация карты
+        /// </summary>
+        /// <param name="number"> Номинал карты </param>
+        /// <param name="suit"> Масть </param>
+        /// <param name="image"> Изображение лицевой стороны </param>
         public Card( int number, string suit, string image )
         {
             this.number = number;
@@ -26,6 +35,9 @@ namespace Patriarchs.Model
             control.ImgSource = imageBitmap;
         }
 
+        /// <summary>
+        /// Номинал карты
+        /// </summary>
         public int Number
         {
             get
@@ -38,6 +50,9 @@ namespace Patriarchs.Model
             }
         }
 
+        /// <summary>
+        /// Масть карты
+        /// </summary>
         public string Suit
         {
             get
@@ -50,6 +65,9 @@ namespace Patriarchs.Model
             }
         }
 
+        /// <summary>
+        /// Представление карты
+        /// </summary>
         public CardLib.CardCtrl CardControl
         {
             get
@@ -62,6 +80,9 @@ namespace Patriarchs.Model
             }
         }
 
+        /// <summary>
+        /// Активность карты
+        /// </summary>
         public bool IsActive
         {
             get
@@ -74,6 +95,10 @@ namespace Patriarchs.Model
             }
         }
 
+        /// <summary>
+        /// Установить лицевую сторону карты
+        /// </summary>
+        /// <param name="path"></param>
         public void SetPathToImage( string path )
         {
             Uri imageUri = new Uri( path, UriKind.Relative );

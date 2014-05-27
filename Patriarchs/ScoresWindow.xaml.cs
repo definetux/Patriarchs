@@ -24,6 +24,12 @@ namespace Patriarchs
 
         public String Score { get; set; }
 
+        /// <summary>
+        /// Инициализация рекорда
+        /// </summary>
+        /// <param name="name"> Имя игрока </param>
+        /// <param name="time"> Время игрока </param>
+        /// <param name="score"> Очки игрока </param>
         public Record( string name, string time, string score )
         {
             this.Name = name;
@@ -36,6 +42,9 @@ namespace Patriarchs
     /// </summary>
     public partial class ScoresWindow : Window
     {
+        /// <summary>
+        /// Инициализация окна
+        /// </summary>
         public ScoresWindow( )
         {
             InitializeComponent( );

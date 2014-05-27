@@ -20,6 +20,9 @@ namespace Patriarchs
     /// </summary>
     public partial class WelcomeWindow : Window
     {
+        /// <summary>
+        /// Инициализация окна
+        /// </summary>
         public WelcomeWindow( )
         {
             InitializeComponent( );

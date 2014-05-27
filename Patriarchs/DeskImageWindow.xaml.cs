@@ -19,6 +19,9 @@ namespace Patriarchs
     /// </summary>
     public partial class DeskImageWindow : Window
     {
+        /// <summary>
+        /// Инициализация окна
+        /// </summary>
         public DeskImageWindow()
         {
             InitializeComponent();

@@ -19,6 +19,9 @@ namespace Patriarchs
     /// </summary>
     public partial class AboutWindow : Window
     {
+        /// <summary>
+        /// Инициализация окна
+        /// </summary>
         public AboutWindow()
         {
             InitializeComponent();

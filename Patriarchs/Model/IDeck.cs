@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Patriarchs.Model
 {
+    /// <summary>
+    /// Интерфейс колоды
+    /// </summary>
     interface IDeck
     {
         Card GetFirstCard( bool isRemove, int number );

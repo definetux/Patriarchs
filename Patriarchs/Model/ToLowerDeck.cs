@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace Patriarchs.Model
 {
+    /// <summary>
+    /// Колода от Короля до Туза
+    /// </summary>
     class ToLowerDeck: WorkDeck
     {
+        /// <summary>
+        /// Инициализация колоды
+        /// </summary>
+        /// <param name="suit"></param>
         public ToLowerDeck( string suit )
             : base( suit )
         {
